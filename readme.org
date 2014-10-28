@@ -4,8 +4,8 @@
 #+author: Jenny Huang
 
 * DrawingFun
-** first checkin 10/20/2014
+** first checkin 10/27/2014
 reference page: http://code.tutsplus.com/tutorials/android-sdk-create-a-drawing-app-interface-creation--mobile-19021
 integrated the codes together, fixed minor compile errors, and will update this project later on by week according to the instructor's requirements and suggestions. 
 
-
+** prepare checkin for 11/3/2014 
