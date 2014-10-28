@@ -1,0 +1,11 @@
+#+latex_class: cn-article
+#+latex_header: \lstset{language=c++,numbers=left,numberstyle=\tiny,basicstyle=\ttfamily\small,tabsize=4,frame=none,escapeinside=``,extendedchars=false,keywordstyle=\color{blue!70},commentstyle=\color{red!55!green!55!blue!55!},rulesepcolor=\color{red!20!green!20!blue!20!}}
+#+title: Android App Programming
+#+author: Jenny Huang
+
+* DrawingFun
+** first checkin 10/20/2014
+reference page: http://code.tutsplus.com/tutorials/android-sdk-create-a-drawing-app-interface-creation--mobile-19021
+integrated the codes together, fixed minor compile errors, and will update this project later on by week according to the instructor's requirements and suggestions. 
+
+
