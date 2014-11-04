@@ -1,11 +1,38 @@
 #+latex_class: cn-article
 #+latex_header: \lstset{language=c++,numbers=left,numberstyle=\tiny,basicstyle=\ttfamily\small,tabsize=4,frame=none,escapeinside=``,extendedchars=false,keywordstyle=\color{blue!70},commentstyle=\color{red!55!green!55!blue!55!},rulesepcolor=\color{red!20!green!20!blue!20!}}
-#+title: Android App Programming
+#+title: Android App Programming Directed Study ~ DrawingFun
 #+author: Jenny Huang
 
-* DrawingFun
-** first checkin 10/27/2014
-reference page: http://code.tutsplus.com/tutorials/android-sdk-create-a-drawing-app-interface-creation--mobile-19021
-integrated the codes together, fixed minor compile errors, and will update this project later on by week according to the instructor's requirements and suggestions. 
+* first checkin 10/27/2014
+** Goal
+  - According to the instructor's requirements that we are going to implement an simple window's Paint like Android app for later on integrating Unicon's 2D graphics to Android app.
+** Course Introduction
+  - We have only two students, the other one is an udnergraduate exchange students with solid Java programming background and relatively slightly week problem-solving skills. For the first more than half semester, we used Sudoku as the starting point and tried several different topics to get our hands wet. 
+** Project Introduction
+  - It's after middle term already, the way we were currently trying on to make it work may just work perfectly for the other classmate, but for me, I feel like it takes forever for me to be able to make any significant progress. So about half a month ago, I was motivated and thought instead of surfacing around and having fun learning by trial and error, maybe I should start from an simple GUI app as a starting point and try my best to expend/extend the APP functionality from there. And also we would be able to work to our final project slightly earlier. 
+  - This GUI will be my very second GUI interface that I have ever created for my Computer Science major, (this first one was an Python Tkinter GUI one week short project for plotting graphics with data abstracted from backend database during an internship;). And I guess it may still be slightly difficult for me to start write Android App code of my own line by line, so I simply searched internet, and trying an tutorial to make a working starting point Android Paint GUI. I integrated the codes from the reference link all together, fixed minor compile errors, and it worked!
+  - This "Copied" GUI will serve as the starting point, and my functionality updates start from here, and I will update my progress for this project later on by week according to the instructor's requirements and suggestions. 
+** References
+  - http://code.tutsplus.com/tutorials/android-sdk-create-a-drawing-app-interface-creation--mobile-19021
+  [[./android_drawing_final.png]]
 
-** prepare checkin for 11/3/2014 
+* Checkin for 11/3/2014 
+** Buttons I have worked on
+*** Color\textunderscore Picker:
+*** Undo/Redo:
+
+** Functionalities and References
+*** Color\textunderscore Picker:
+  - Motivated by the Picasso Android app, seeing their multiple color choices, our starting point *12* fixed colors were too limited. 
+*** Undo/Redo Buttons:
+  - Also motivated by the Picasso app, intended to work on *Undo* button, and ended up found *Redo* button could be very convenient as well. 
+  - needs to update these Undo/Redo methods later on, this is just the starting point most basic implementation for this button set.
+*** snapshot
+[[./20141103.png]]
+
+** TODO
+*** Load file:
+*** Drawing shapes with Finger
+  - http://gmariotti.blogspot.com/2014/01/drawing-shapes-with-fingers.html
+*** Erase Rectangle:
+*** Undo/Redo:

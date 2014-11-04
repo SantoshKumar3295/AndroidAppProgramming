@@ -7,7 +7,24 @@
 
   <string name="start_new">New</string>
   <string name="brush">Brush</string>
+
+  <string name="open">Open</string>
+  <string name="color">Color</string>
+  <string name="shape">Shape</string>
+  <string name="fill">Fill</string>
+  <string name="undo">Undo</string>
+  <string name="redo">Redo</string>
+
+  <string name="hue_view_content_desc">Hue image</string>
+  <string name="hue_cursor_content_desc">Hue image cursor</string>
+  <string name="color_picker_content_desc">Color picker image</string>
+  <string name="arrow_content_desc">Arrow image</string>
+<!--
+  <string name="app_name">Color Picker</string>
+-->
+
   <string name="erase">Erase</string>
+  <string name="recterase">Rectangle Erase</string>
   <string name="save">Save</string>
   <string name="paint">Paint</string>
   <string name="paint_pressed">Paint_Pressed</string>
