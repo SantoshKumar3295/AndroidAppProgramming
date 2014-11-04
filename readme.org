@@ -31,8 +31,9 @@
 [[./20141103.png]]
 
 ** Todo
-*** Load file:
-*** Drawing shapes with Finger
+*** Load image file button
+*** Drawing shapes with Finger for primitives
+  refer to the reference below: 
   - http://gmariotti.blogspot.com/2014/01/drawing-shapes-with-fingers.html
-*** Erase Rectangle:
-*** Undo/Redo:
+*** Erase Rectangle
+*** Undo/Redo
