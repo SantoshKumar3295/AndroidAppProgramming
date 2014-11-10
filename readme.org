@@ -49,6 +49,7 @@
   - refer to the reference below for some basic shapes: line, smooth line, circle, triangle, Rectangle, square
   - http://gmariotti.blogspot.com/2014/01/drawing-shapes-with-fingers.html
   - *ListView* in *Alert Dialog* is searched from online without direct reference.
+  - Since the erase was using draw smooth line. This button works also means that I could erase a "*Rectangle*" shape, or "*Circle*" shape.
   - I have other course priority for the passed week, so I just have enough time to finish this course's priority, but I will try to work harder in order to finish all the functionalities for this course.
   - It's not a good looking ListView, but yet it's a fully functional button.
   - This button right now is fully functional, but to finish this project first, I have not spent any quality time to expand any primitives yet, rather than the existing six ones from the reference listed below. 
