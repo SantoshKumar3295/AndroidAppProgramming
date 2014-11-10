@@ -1,4 +1,4 @@
-% Created 2014-11-03 Mon 16:13
+% Created 2014-11-10 Mon 15:18
 \documentclass[9pt,b5paper]{article}
 \usepackage{graphicx}
 \usepackage{xcolor}
@@ -38,18 +38,18 @@
 \subsection{Goal}
 \label{sec-1-1}
 \begin{itemize}
-\item According to the instructor's requirements that we are going to implement an simple window's Paint like Android app for later on integrating Union’s 2D graphics to Android app.
+\item According to the instructor's requirements that we are going to implement an simple window's Paint like Android app for later on integrating Unicon's 2D graphics to Android app.
 \end{itemize}
 \subsection{Course Introduction}
 \label{sec-1-2}
 \begin{itemize}
-\item We have only two students, the other one is an undergraduate exchange students with solid Java programming background and relatively slightly week problem-solving skills. For the first more than half semester, we used Sudoku as the starting point and tried several different topics to get our hands wet.
+\item We have only two students, the other one is an udnergraduate exchange students with solid Java programming background and relatively slightly week problem-solving skills. For the first more than half semester, we used Sudoku as the starting point and tried several different topics to get our hands wet.
 \end{itemize}
 \subsection{Project Introduction}
 \label{sec-1-3}
 \begin{itemize}
 \item It's after middle term already, the way we were currently trying on to make it work may just work perfectly for the other classmate, but for me, I feel like it takes forever for me to be able to make any significant progress. So about half a month ago, I was motivated and thought instead of surfacing around and having fun learning by trial and error, maybe I should start from an simple GUI app as a starting point and try my best to expend/extend the APP functionality from there. And also we would be able to work to our final project slightly earlier.
-\item This GUI will be my very second GUI interface that I have ever created for my Computer Science major, (this first one was an Python Tkinter GUI one week short project for plotting graphics with data abstracted from back end database during an intern-ship;). And I guess it may still be slightly difficult for me to start write Android App code of my own line by line, so I simply searched internet, and trying an tutorial to make a working starting point Android Paint GUI. I integrated the codes from the reference link all together, fixed minor compile errors, and it worked!
+\item This GUI will be my very second GUI interface that I have ever created for my Computer Science major, (this first one was an Python Tkinter GUI one week short project for plotting graphics with data abstracted from backend database during an internship;). And I guess it may still be slightly difficult for me to start write Android App code of my own line by line, so I simply searched internet, and trying an tutorial to make a working starting point Android Paint GUI. I integrated the codes from the reference link all together, fixed minor compile errors, and it worked!
 \item This "Copied" GUI will serve as the starting point, and my functionality updates start from here, and I will update my progress for this project later on by week according to the instructor's requirements and suggestions.
 \end{itemize}
 \subsection{References}
@@ -57,20 +57,20 @@
 \begin{itemize}
 \item \url{http://code.tutsplus.com/tutorials/android-sdk-create-a-drawing-app-interface-creation--mobile-19021}
 \end{itemize}
-\includegraphics[width=.6\linewidth]{./android_drawing_final.png}
+\includegraphics[width=.9\linewidth]{./android_drawing_final.png}
 
 \section{Checkin for 11/3/2014}
 \label{sec-2}
 \subsection{Buttons I have worked on}
 \label{sec-2-1}
-\subsubsection{Color\textunderscore Picker:}
+\subsubsection{Color$_{\text{Picker}}$:}
 \label{sec-2-1-1}
 \subsubsection{Undo/Redo:}
 \label{sec-2-1-2}
 
 \subsection{Functionalities and References}
 \label{sec-2-2}
-\subsubsection{Color\textunderscore Picker:}
+\subsubsection{Color$_{\text{Picker}}$:}
 \label{sec-2-2-1}
 \begin{itemize}
 \item Motivated by the Picasso Android app, seeing their multiple color choices, our starting point \textbf{12} fixed colors were too limited.
@@ -83,21 +83,67 @@
 \end{itemize}
 \subsubsection{Snapshot}
 \label{sec-2-2-3}
-\includegraphics[width=.6\linewidth]{./20141103.png}
+\includegraphics[width=.9\linewidth]{./20141103.png}
 
 \subsection{Todo}
 \label{sec-2-3}
-\subsubsection{Load image file button}
-\label{sec-2-3-1}
 \subsubsection{Drawing shapes with Finger for primitives}
-\label{sec-2-3-2}
+\label{sec-2-3-1}
 refer to the reference below: 
 \begin{itemize}
 \item \url{http://gmariotti.blogspot.com/2014/01/drawing-shapes-with-fingers.html}
+\item This button will be first priority to finish
 \end{itemize}
+\subsubsection{Load image file button}
+\label{sec-2-3-2}
 \subsubsection{Erase Rectangle}
 \label{sec-2-3-3}
 \subsubsection{Undo/Redo}
 \label{sec-2-3-4}
+
+
+\section{Checkin for 11/10/2014}
+\label{sec-3}
+\subsection{Buttons I have worked on}
+\label{sec-3-1}
+\subsubsection{shapeBtn for primitives}
+\label{sec-3-1-1}
+
+\subsection{Functionalities and References}
+\label{sec-3-2}
+\subsubsection{shapeBtn for primitives: Drawing shapes with Finger for primitives}
+\label{sec-3-2-1}
+\begin{itemize}
+\item refer to the reference below for some basic shapes: line, smooth line, circle, triangle, Rectangle, square
+\item \url{http://gmariotti.blogspot.com/2014/01/drawing-shapes-with-fingers.html}
+\item \textbf{ListView} in \textbf{Alert Dialog} is searched from online without direct reference.
+\item I have other course priority for the passed week, so I just have enough time to finish this course's priority, but I will try to work harder in order to finish all the functionalities for this course.
+\item It's not a good looking ListView, but yet it's a fully functional button.
+\item This button right now is fully functional, but to finish this project first, I have not spent any quality time to expand any primitives yet, rather than the existing six ones from the reference listed below.
+\item But later on when I have time, I will come back for more 2D/3D graphics drawing here.
+\end{itemize}
+\subsubsection{Snapshot}
+\label{sec-3-2-2}
+\includegraphics[width=.9\linewidth]{./20141110-14-27-05.png}
+
+\subsection{Issue:}
+\label{sec-3-3}
+\subsubsection{ViewRootImpl(31835): sendUserActionEvent() mView == null}
+\label{sec-3-3-1}
+\begin{itemize}
+\item \url{http://stackoverflow.com/questions/18028666/senduseractionevent-is-null}
+\item It said to be specific device's problem. And I didn't have enough time and internet to go any further from there.
+\end{itemize}
+\subsection{Todo}
+\label{sec-3-4}
+Rank any one of the first three to be top priority, and go from there.
+\subsubsection{Erase Rectangle}
+\label{sec-3-4-1}
+\subsubsection{Undo/Redo}
+\label{sec-3-4-2}
+\subsubsection{Fill paint}
+\label{sec-3-4-3}
+\subsubsection{Load image file button}
+\label{sec-3-4-4}
 % Emacs 24.3.1 (Org mode 8.2.7c)
 \end{document}

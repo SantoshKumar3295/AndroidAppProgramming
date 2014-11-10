@@ -33,4 +33,12 @@
   <string name="med">Medium</string>
   <string name="lrg">Large</string>
 
+    <color name="bgFFFF66" >#99FFFF66</color>
+    <color name="bgFFFFFF" >#99FFFFFF</color>
+    <color name="bg000000" >#99000000</color>
+    <color name="bgFFCCFF" >#99FFCCFF</color>
+    <color name="bgFFCC00" >#99FFCC00</color>
+    <color name="bgCCFF00" >#99CCFF00</color>
+    <color name="bgFF00CC" >#99FF00CC</color>
+
 </resources>

@@ -1,49 +1,63 @@
 package dev.drawingfun;
 
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-
 import java.util.UUID;
 import android.util.Log;
 import android.graphics.Color;
 import android.support.v4.app.*;
-
 import android.provider.MediaStore;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
-//public class MainActivity extends Activity implements OnClickListener {
-//public class MainActivity extends FragmentActivity implements OnAmbilWarnaListener {
-public class MainActivity extends FragmentActivity implements OnAmbilWarnaListener, View.OnClickListener {
-    
+public class MainActivity extends SuperActivity implements View.OnClickListener {
     private DrawingView drawView;
-    private ImageButton currPaint, drawBtn, eraseBtn, newBtn, saveBtn, colorBtn, undoBtn, redoBtn;
+    private ImageButton currPaint, drawBtn, eraseBtn, newBtn, saveBtn, colorBtn, undoBtn, redoBtn, shapeBtn;
     private float smallBrush, mediumBrush, largeBrush;
     private static int mColor = 0; // mColor, colorBtn
 
+    private static String mShape;
+    public static String FILEPATH = "filePath";
+    public static String FILENAME = "fileName";
+    private int selectedItem = 7;  // reset this value to something else
+    //private static int drawShape = 4;
+    
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // drawview
         drawView = (DrawingView)findViewById(R.id.drawing);
-
-        // get rid of this layout already
-        //LinearLayout paintLayout = (LinearLayout)findViewById(R.id.paint_colors);
-        // get the first button and store it as the instance variable
-        //currPaint = (ImageButton)paintLayout.getChildAt(0);
-        // show the button is selected
-        //currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
-
         drawBtn = (ImageButton)findViewById(R.id.draw_btn);
         drawBtn.setOnClickListener(this);
         smallBrush = getResources().getInteger(R.integer.small_size);
@@ -58,8 +72,8 @@ public class MainActivity extends FragmentActivity implements OnAmbilWarnaListen
         saveBtn = (ImageButton)findViewById(R.id.save_btn);
         saveBtn.setOnClickListener(this);
 
+        // for colorBtn
         colorBtn = (ImageButton)findViewById(R.id.color_btn);
-        //colorBtn.setOnClickListener(this);
         colorBtn.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {                
@@ -74,30 +88,39 @@ public class MainActivity extends FragmentActivity implements OnAmbilWarnaListen
             }
         }
         
+        // for undoBtn
         undoBtn = (ImageButton)findViewById(R.id.undo_btn);
-        //undoBtn.setOnClickListener(this);
         undoBtn.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {                
                     drawView.onClickUndo();
                 }
             });
-        
+        // for redoBtn
         redoBtn = (ImageButton)findViewById(R.id.redo_btn);
-        //redoBtn.setOnClickListener(this);
         redoBtn.setOnClickListener(new OnClickListener(){
                 @Override
                 public void onClick(View v) {                
                     drawView.onClickRedo();
                 }
             });
+
+        // for shapeBtn
+        shapeBtn = (ImageButton)findViewById(R.id.shape_btn);
+
+        shapeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<String> values = GetCity();
+                showSudokuListDialog(values);
+            }
+        });
     }
+
 
     @Override
     public void onClick(View view) {
-        // respond to clicks -- for drawButton
         if (view.getId() == R.id.draw_btn) {
-            // draw button clicked
             final Dialog brushDialog = new Dialog(this);
             brushDialog.setTitle("Brush size:");
             brushDialog.setContentView(R.layout.brush_chooser);
@@ -238,24 +261,7 @@ public class MainActivity extends FragmentActivity implements OnAmbilWarnaListen
         }
         return super.onOptionsItemSelected(item);
     }
-    /*
-    public void paintClicked(View view) {
-        drawView.setErase(false);
-        drawView.setBrushSize(drawView.getLastBrushSize());
-        // uer chosen color
-        if (view != currPaint){
-            // update color
-            ImageButton imgView = (ImageButton)view;
-            String color = view.getTag().toString();
-            drawView.setColor(color);
 
-            // update UI to reflect the new chosen paint and set the previous one back to normal
-            imgView.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
-            currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint));
-            currPaint = (ImageButton)view;
-        }
-    }
-    */
     @Override
     public void onCancel(AmbilWarnaDialogFragment dialogFragment)  {
         Log.d("TAG", "onCancel()");
@@ -264,29 +270,149 @@ public class MainActivity extends FragmentActivity implements OnAmbilWarnaListen
     @Override
     public void onOk(AmbilWarnaDialogFragment dialogFragment, int color)  {
         Log.d("TAG", "onOk(). Color: " + color);
-        //MainActivity.this.mColor = color;
 
         drawView.setErase(false);
         drawView.setBrushSize(drawView.getLastBrushSize());
 
         // uer chosen color
-        //if (view != currPaint) {
         if (color != mColor) {
             // update color
-            //ImageButton imgView = (ImageButton)view;
-            //String color = view.getTag().toString();
+            //MainActivity.this.mColor = color;
             MainActivity.this.mColor = color;
             drawView.setColor(mColor);
-            // update UI to reflect the new chosen paint and set the previous one back to normal
-            //imgView.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
-            //currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint));
-            //currPaint = (ImageButton)view;
         }
     }
 
+    // for shapeBtn
+    public void showSudokuListDialog(ArrayList<String> values) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        LayoutInflater layout = LayoutInflater.from(MainActivity.this);
+        View  sudokulistView = layout.inflate(R.layout.sudokulist, null);
+        final ListView listView = (ListView) sudokulistView.findViewById(R.id.lvSudokuItems);  // change with listView
+        builder.setView(sudokulistView);
+        builder.setCancelable(false);
+
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
+		listView.setAdapter(adapter);
+        
+        // set list click event
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @SuppressWarnings("unchecked")
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    selectedItem = position;
+                    drawView.setmCurrentShape(selectedItem);
+                    //String strPreview = (String)adapter.getItem(position);
+                }
+            });
+
+        // set list touch event
+        listView.setOnTouchListener(new AdapterView.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    return false;
+                }
+            });
+
+        // set open button getResources().getString(R.string.dialogOpenBtnOK)
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    try {
+                        Field field = dialog.getClass().getSuperclass().getDeclaredField("mShowing");
+                        field.setAccessible(true);
+                        field.setBoolean(dialog, false);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if (selectedItem == -1) {
+                        return;
+                    } else {
+                        try {
+                            Field field = dialog.getClass().getSuperclass().getDeclaredField("mShowing");
+                            field.setAccessible(true);
+                            field.setBoolean(dialog, true);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        dialog.dismiss();
+                    }
+                }
+            });
+        
+        // set Cancel button
+        // getResources().getString(R.string.dialogOpenBtnCancel)
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    try {
+                        Field field = dialog.getClass().getSuperclass().getDeclaredField("mShowing");
+                        field.setAccessible(true);
+                        field.setBoolean(dialog, true);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    dialog.dismiss();
+                }
+            });
+        builder.create().show();
+    }
+
+    private ArrayList<String> GetCity() {
+        ArrayList<String> values = new ArrayList<String>();
+        values.add("Rectangle");
+        values.add("Square");
+        values.add("Circle");
+        values.add("Line");
+        values.add("Smooth Line");
+        values.add("Triangle");
+        return values;
+    }
+
+    /*
+        @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCancel(AmbilWarnaDialogFragment dialogFragment)  {
+        Log.d("TAG", "onCancel()");
+    }
+
+    @Override
+    public void onOk(AmbilWarnaDialogFragment dialogFragment, int color)  {
+        Log.d("TAG", "onOk(). Color: " + color);
+
+        //drawView.setErase(false);
+        //drawView.setBrushSize(drawView.getLastBrushSize());
+
+        // uer chosen color
+        if (color != mColor) {
+            // update color
+            //MainActivity.this.mColor = color;
+            SuperActivity.this.mColor = color;
+            //drawView.setColor(mColor);
+        }
+    }
+    */
     // show Color Picker dialog fragment. If color wasn't set previously, set BLUE by default
-    private void showColorPicker() {
-        int thisColor = mColor == 0 ? Color.BLUE : mColor;
+    public void showColorPicker() {
+        int thisColor = super.mColor == 0 ? Color.BLUE : mColor;
         // create new instance of AmbilWarnaDialogFragment and set OnAmbilWarnaListener to it
         // show dialog fragment with some tag value
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -296,45 +422,3 @@ public class MainActivity extends FragmentActivity implements OnAmbilWarnaListen
     }
 }
 
-/*
-  } else if(view.getId() == R.id.color_btn){
-  final int initialColor = 100;
-
-  // create OnAmbilWarnaListener instance
-  // new color can be retrieved in onOk() event
-  OnAmbilWarnaListener onAmbilWarnaListener = new OnAmbilWarnaListener() {
-  @Override
-  public void onCancel(AmbilWarnaDialogFragment dialogFragment) {
-  Log.d("TAG", "onCancel()");
-  }
-  @Override
-  public void onOk(AmbilWarnaDialogFragment dialogFragment, int color) {
-  Log.d("TAG", "onOk().color: " + color);
-  //String color = view.getTag().toString();
-  //drawView.setColor(color);
-  MainActivity.this.mColor = color;
-  }
-  };
-            
-  // create new instance of AmbilWarnaDialogFragment and set OnAmbilWarnaListener listener to it
-  // show dialog fragment with some tag value
-  FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-  AmbilWarnaDialogFragment fragment = AmbilWarnaDialogFragment.newInstance(mColor);
-  fragment.setOnAmbilWarnaListener(onAmbilWarnaListener);
-  fragment.show(ft, "color_picker_dialog");
-            
-  // select the color Dialog
-  /*
-  ColorWheelDialog dialog = new ColorWheelDialog(this, initialColor, new OnAmbilWarnaListener() {
-  @Override
-  public void onOK(ColorWheelDialog dialog, int color) {
-  // color is the color selected by the user.
-  // dialog.onOK(dialog, color);
-  }  
-  @Override
-  public void onCancel(ColorWheelDialog dialog) {
-  // cancel was selected by the user
-  // colorGot = initialColor;
-  }
-  });  
-  dialog.show();*/
