@@ -56,11 +56,6 @@
   - But later on when I have time, I will come back for more 2D/3D graphics drawing here. 
 *** Snapshot
 [[./20141110-14-27-05.png]]
-
-** Issue:
-*** ViewRootImpl(31835): sendUserActionEvent() mView == null
-  - http://stackoverflow.com/questions/18028666/senduseractionevent-is-null
-  - It said to be specific device's problem. And I didn't have enough time and internet to go any further from there. 
 ** Todo
    Rank any one of the first three to be top priority, and go from there.
 *** Erase Rectangle
