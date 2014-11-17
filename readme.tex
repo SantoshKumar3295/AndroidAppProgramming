@@ -1,4 +1,4 @@
-% Created 2014-11-10 Mon 23:54
+% Created 2014-11-17 Mon 15:20
 \documentclass[9pt,b5paper]{article}
 \usepackage{graphicx}
 \usepackage{xcolor}
@@ -81,26 +81,33 @@
 \item Also motivated by the Picasso app, intended to work on \textbf{Undo} button, and ended up found \textbf{Redo} button could be very convenient as well.
 \item needs to update these Undo/Redo methods later on, this is just the starting point most basic implementation for this button set.
 \end{itemize}
-\subsubsection{Snapshot}
-\label{sec-2-2-3}
+\subsection{Snapshot}
+\label{sec-2-3}
 \includegraphics[width=.5\linewidth]{./20141103.png}
 
 \subsection{Todo}
-\label{sec-2-3}
+\label{sec-2-4}
+\subsubsection{Drawing shapes with Finger for primitives}
+\label{sec-2-4-1}
+refer to the reference below: 
 \begin{itemize}
-\item Drawing shapes with Finger for primitives: refer to the reference below: \url{http://gmariotti.blogspot.com/2014/01/drawing-shapes-with-fingers.html}. This button will be first priority to finish.
-\item Load image file button
-\item Erase Rectangle
-\item Undo/Redo
+\item \url{http://gmariotti.blogspot.com/2014/01/drawing-shapes-with-fingers.html}
+\item This button will be first priority to finish
 \end{itemize}
+\subsubsection{Load image file button}
+\label{sec-2-4-2}
+\subsubsection{Erase Rectangle}
+\label{sec-2-4-3}
+\subsubsection{Undo/Redo}
+\label{sec-2-4-4}
+
 
 \section{Checkin for 11/10/2014}
 \label{sec-3}
 \subsection{Buttons I have worked on}
 \label{sec-3-1}
-\begin{itemize}
-\item shapeBtn for primitives
-\end{itemize}
+\subsubsection{shapeBtn for primitives}
+\label{sec-3-1-1}
 
 \subsection{Functionalities and References}
 \label{sec-3-2}
@@ -115,17 +122,105 @@
 \item It's not a good looking ListView, but yet it's a fully functional button.
 \item This button right now is fully functional, but to finish this project first, I have not spent any quality time to expand any primitives yet, rather than the existing six ones from the reference listed below.
 \end{itemize}
-\subsubsection{Snapshot}
-\label{sec-3-2-2}
-\includegraphics[width=.5\linewidth]{./20141110-14-27-05.png}
-\subsection{Todo}
+\subsection{Snapshot}
 \label{sec-3-3}
-Rank any one of the first three to be top priority, and go from there.
+\includegraphics[width=.5\linewidth]{./20141110-14-27-05.png}
+\subsection{Special Situation}
+\label{sec-3-4}
 \begin{itemize}
+\item There were too many students piled/lined up in front of Dr. Jeffery's door, and he didn't break the line by stating that it's our direct study time. So the other classmate and I just stepped away from his office, and we didn't really meet during last week.
+\item The other classmate and I have talked, and we happened to have worked on the same shapeBtn, I applied ListView in a dialog box with all six drawing shapes applied, and he created a (ListView? not sure) with a clickable button as one element with four shapes applied. And he agreeed my ListView looked way prettier than his buttons did.
+\item But I am willing to and more than happy to think that he could have worked on something else important for him that I actually didn't have time to work on during the passed week.
+\end{itemize}
+\subsection{Todo}
+\label{sec-3-5}
+\begin{itemize}
+\item Load image file button
 \item Erase Rectangle
 \item Undo/Redo
 \item Fill paint
-\item Load image file button
+\end{itemize}
+
+\section{Checkin for 11/17/2014}
+\label{sec-4}
+\subsection{Buttons I have worked on}
+\label{sec-4-1}
+\begin{itemize}
+\item openBtn for loading an image file as an ImageView
+\item Undo/Redo
+\end{itemize}
+\subsection{Functionalities and References}
+\label{sec-4-2}
+\subsubsection{openBtn for loading an image file as an ImageView}
+\label{sec-4-2-1}
+\begin{itemize}
+\item The method I applied is memory saving for AsyncTask, which is better than load images directly, which could potentially block UI for couple of seconds;
+\item Loaded an image from online, but would like to try load internal images from device later on, like a drawing which I saved earlier onto my internal device;
+\item Potentially apply layer oncepts to produce multiple layer drawing, needs suggestions to organize my idea how to implement this feature.
+\item \textbf{Question}: Right now, my image is an ImageView in my layout, what ideas that I could use to set/change/transfer my ImageView to be my draw view background?
+\item References:
+
+\url{http://www.learn2crack.com/2014/06/android-load-image-from-internet.html}
+
+\url{http://stackoverflow.com/questions/5776851/load-image-from-url}
+
+\url{https://github.com/koush/UrlImageViewHelper}
+\end{itemize}
+
+\subsubsection{Undo/Redo}
+\label{sec-4-2-2}
+\begin{itemize}
+\item After implemented subclass SuperActivity class which extends Activity on week checkin for 11/10/2014 for my ListView implementation, subclass of Path() was very difficult for me to think about implement before, but after my trial on ListView, super/sub class in Java all made sense to me now. It's a piece of cake, and I know I can wrap whatever material I need in order to paint nice and neat.
+\item Implemented by developing a subclass myPath to wrap the super Path(), drawPaint color, and drawPaint strokesize together as an object.
+\item Based on previous progress that I can undo/redo only with all the drawCanvas with the same paint color, now my updo/redo paths could be colorful and with various strokesizes.
+\item References:
+
+Path() library:
+
+\url{http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/2.3.1_r1/android/graphics/Path.java}
+
+Bitmap cacheing:
+
+\url{http://stackoverflow.com/questions/3406910/efficient-2d-drawing-in-android/3408641#3408641}
+
+\item \textbf{Questions}: 
+
+\begin{enumerate}
+\item Undo/Redo for simple path seem to behavor fairly ok, but instead of lineTo wired line, how do I implement smooth line? How could I differentiate different strokesizes more clear with lines I have so far?
+
+\item One little detail though, I dras after touch up, my paint color change delayed, how do I implement \textbf{real time}?
+
+\item About previous ListView six different shapes, with Undo/Redo properly functionaing, I realize I just lost my siz shapes again cause I need to rewrite/implement methods in order for them to be able to Undo/Redo \textasciitilde{}? (My subclass works perfectly for this propose, just that I lost my internal link to primitives, which means I probably should rewrite my primitives draw methods according to undo/redo prerequirements. I don't think it will be difficult, but I don't have enough time for this for the pass week, and I need to organize my ideas about these implementation clear. )
+
+\item I prioritize undo/redo to be more important than any other buttons cause I know they would give me great practise together with primitives implementation methods rewrite. So I have not touch "Erase Rectangle" button and "paint fill" button yet. According to these idea, I would prioritize Rectangle rewrite with the highest priority, so that later on I can follow up with erase Rectangle (which means draw Rectangle first, fill with background color, and undo could remove this erase step). Correct me if I am wrong.
+\end{enumerate}
+\end{itemize}
+
+\subsubsection{References: all about Android}
+\label{sec-4-2-3}
+\begin{itemize}
+\item \url{https://github.com/kesenhoo/android-training-course-in-chinese}
+\end{itemize}
+
+\subsection{Snapshot}
+\label{sec-4-3}
+\includegraphics[width=.5\linewidth]{./Screenshot_2014-11-17-15-11-20.png}
+\subsection{Todo}
+\label{sec-4-4}
+Only two button left untouched, could do the following or anything I am interested to implement. 
+\begin{itemize}
+\item Erase Rectangle
+\item Fill paint
+\end{itemize}
+
+Potential interests: may implement depends on how I spend thanksgiving \textasciitilde{}~
+\begin{itemize}
+\item touch ImageView Activities: zoomin, zoomout, rotate, fading, etc
+\item SurfaceView rotate images through new thread
+\item canvas save() and restore()
+\item OpenGL spinning circle
+\item widely used draw methods
+\item Easy draw operations
 \end{itemize}
 % Emacs 24.3.1 (Org mode 8.2.7c)
 \end{document}

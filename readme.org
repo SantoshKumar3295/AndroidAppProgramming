@@ -27,18 +27,22 @@
 *** Undo/Redo Buttons:
   - Also motivated by the Picasso app, intended to work on *Undo* button, and ended up found *Redo* button could be very convenient as well. 
   - needs to update these Undo/Redo methods later on, this is just the starting point most basic implementation for this button set.
-*** Snapshot
+** Snapshot
 [[./20141103.png]]
 
 ** Todo
-  - Drawing shapes with Finger for primitives: refer to the reference below: http://gmariotti.blogspot.com/2014/01/drawing-shapes-with-fingers.html. This button will be first priority to finish.
-  - Load image file button
-  - Erase Rectangle
-  - Undo/Redo
+*** Drawing shapes with Finger for primitives
+  refer to the reference below: 
+  - http://gmariotti.blogspot.com/2014/01/drawing-shapes-with-fingers.html
+  - This button will be first priority to finish
+*** Load image file button
+*** Erase Rectangle
+*** Undo/Redo
+
 
 * Checkin for 11/10/2014
 ** Buttons I have worked on
-  - shapeBtn for primitives
+*** shapeBtn for primitives
 
 ** Functionalities and References
 *** shapeBtn for primitives: Drawing shapes with Finger for primitives
@@ -49,12 +53,75 @@
   - I have other course priority for the passed week, so I just have enough time to finish this course's priority, but I will try to work harder in order to finish all the functionalities for this course.
   - It's not a good looking ListView, but yet it's a fully functional button.
   - This button right now is fully functional, but to finish this project first, I have not spent any quality time to expand any primitives yet, rather than the existing six ones from the reference listed below. 
-*** Snapshot
+** Snapshot
 [[./20141110-14-27-05.png]]
+** Special Situation
+  - There were too many students piled/lined up in front of Dr. Jeffery's door, and he didn't break the line by stating that it's our direct study time. So the other classmate and I just stepped away from his office, and we didn't really meet during last week. 
+  - The other classmate and I have talked, and we happened to have worked on the same shapeBtn, I applied ListView in a dialog box with all six drawing shapes applied, and he created a (ListView? not sure) with a clickable button as one element with four shapes applied. And he agreeed my ListView looked way prettier than his buttons did. 
+  - But I am willing to and more than happy to think that he could have worked on something else important for him that I actually didn't have time to work on during the passed week.
 ** Todo
-   Rank any one of the first three to be top priority, and go from there.
+  - Load image file button
   - Erase Rectangle
   - Undo/Redo
   - Fill paint
-  - Load image file button
+
+* Checkin for 11/17/2014
+** Buttons I have worked on
+  - openBtn for loading an image file as an ImageView
+  - Undo/Redo
+** Functionalities and References
+*** openBtn for loading an image file as an ImageView
+  - The method I applied is memory saving for AsyncTask, which is better than load images directly, which could potentially block UI for couple of seconds;
+  - Loaded an image from online, but would like to try load internal images from device later on, like a drawing which I saved earlier onto my internal device;
+  - Potentially apply layer oncepts to produce multiple layer drawing, needs suggestions to organize my idea how to implement this feature.
+  - *Question*: Right now, my image is an ImageView in my layout, what ideas that I could use to set/change/transfer my ImageView to be my draw view background?
+  - References:
+    
+    http://www.learn2crack.com/2014/06/android-load-image-from-internet.html
+
+    http://stackoverflow.com/questions/5776851/load-image-from-url
+
+    https://github.com/koush/UrlImageViewHelper
+
+*** Undo/Redo
+  - After implemented subclass SuperActivity class which extends Activity on week checkin for 11/10/2014 for my ListView implementation, subclass of Path() was very difficult for me to think about implement before, but after my trial on ListView, super/sub class in Java all made sense to me now. It's a piece of cake, and I know I can wrap whatever material I need in order to paint nice and neat. 
+  - Implemented by developing a subclass myPath to wrap the super Path(), drawPaint color, and drawPaint strokesize together as an object. 
+  - Based on previous progress that I can undo/redo only with all the drawCanvas with the same paint color, now my updo/redo paths could be colorful and with various strokesizes. 
+  - References:
+
+    Path() library:
+
+    http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/2.3.1_r1/android/graphics/Path.java
+    
+    Bitmap cacheing:
+
+    http://stackoverflow.com/questions/3406910/efficient-2d-drawing-in-android/3408641#3408641
+
+  - *Questions*: 
+
+    1. Undo/Redo for simple path seem to behavor fairly ok, but instead of lineTo wired line, how do I implement smooth line? How could I differentiate different strokesizes more clear with lines I have so far?
+ 
+    2. One little detail though, I dras after touch up, my paint color change delayed, how do I implement *real time*?
+ 
+    3. About previous ListView six different shapes, with Undo/Redo properly functionaing, I realize I just lost my siz shapes again cause I need to rewrite/implement methods in order for them to be able to Undo/Redo ~? (My subclass works perfectly for this propose, just that I lost my internal link to primitives, which means I probably should rewrite my primitives draw methods according to undo/redo prerequirements. I don't think it will be difficult, but I don't have enough time for this for the pass week, and I need to organize my ideas about these implementation clear. )
+
+   4. I prioritize undo/redo to be more important than any other buttons cause I know they would give me great practise together with primitives implementation methods rewrite. So I have not touch "Erase Rectangle" button and "paint fill" button yet. According to these idea, I would prioritize Rectangle rewrite with the highest priority, so that later on I can follow up with erase Rectangle (which means draw Rectangle first, fill with background color, and undo could remove this erase step). Correct me if I am wrong. 
+
+*** References: all about Android
+  - https://github.com/kesenhoo/android-training-course-in-chinese
+
+** Snapshot
+[[./Screenshot_2014-11-17-15-11-20.png]]
+** Todo
+  Only two button left untouched, could do the following or anything I am interested to implement. 
+  - Erase Rectangle
+  - Fill paint
+
+  Potential interests: may implement depends on how I spend thanksgiving ~~
+  - touch ImageView Activities: zoomin, zoomout, rotate, fading, etc
+  - SurfaceView rotate images through new thread
+  - canvas save() and restore()
+  - OpenGL spinning circle
+  - widely used draw methods
+  - Easy draw operations
 
