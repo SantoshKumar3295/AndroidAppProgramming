@@ -1,4 +1,4 @@
-% Created 2014-11-17 Mon 15:20
+% Created 2014-11-17 Mon 16:15
 \documentclass[9pt,b5paper]{article}
 \usepackage{graphicx}
 \usepackage{xcolor}
@@ -57,7 +57,7 @@
 \begin{itemize}
 \item \url{http://code.tutsplus.com/tutorials/android-sdk-create-a-drawing-app-interface-creation--mobile-19021}
 \end{itemize}
-\includegraphics[width=.5\linewidth]{./android_drawing_final.png}
+\includegraphics[width=.9\linewidth]{./android_drawing_final.png}
 
 \section{Checkin for 11/3/2014}
 \label{sec-2}
@@ -83,7 +83,7 @@
 \end{itemize}
 \subsection{Snapshot}
 \label{sec-2-3}
-\includegraphics[width=.5\linewidth]{./20141103.png}
+\includegraphics[width=.9\linewidth]{./20141103.png}
 
 \subsection{Todo}
 \label{sec-2-4}
@@ -124,7 +124,7 @@ refer to the reference below:
 \end{itemize}
 \subsection{Snapshot}
 \label{sec-3-3}
-\includegraphics[width=.5\linewidth]{./20141110-14-27-05.png}
+\includegraphics[width=.9\linewidth]{./20141110-14-27-05.png}
 \subsection{Special Situation}
 \label{sec-3-4}
 \begin{itemize}
@@ -190,6 +190,8 @@ Bitmap cacheing:
 
 \item One little detail though, I dras after touch up, my paint color change delayed, how do I implement \textbf{real time}?
 
+\textbf{Answered}: drawPath.reset() produced all the trouble.
+
 \item About previous ListView six different shapes, with Undo/Redo properly functionaing, I realize I just lost my siz shapes again cause I need to rewrite/implement methods in order for them to be able to Undo/Redo \textasciitilde{}? (My subclass works perfectly for this propose, just that I lost my internal link to primitives, which means I probably should rewrite my primitives draw methods according to undo/redo prerequirements. I don't think it will be difficult, but I don't have enough time for this for the pass week, and I need to organize my ideas about these implementation clear. )
 
 \item I prioritize undo/redo to be more important than any other buttons cause I know they would give me great practise together with primitives implementation methods rewrite. So I have not touch "Erase Rectangle" button and "paint fill" button yet. According to these idea, I would prioritize Rectangle rewrite with the highest priority, so that later on I can follow up with erase Rectangle (which means draw Rectangle first, fill with background color, and undo could remove this erase step). Correct me if I am wrong.
@@ -204,7 +206,7 @@ Bitmap cacheing:
 
 \subsection{Snapshot}
 \label{sec-4-3}
-\includegraphics[width=.5\linewidth]{./Screenshot_2014-11-17-15-11-20.png}
+\includegraphics[width=.9\linewidth]{./Screenshot_2014-11-17-15-11-20.png}
 \subsection{Todo}
 \label{sec-4-4}
 Only two button left untouched, could do the following or anything I am interested to implement. 

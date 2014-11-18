@@ -38,10 +38,19 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.database.Cursor;
+import android.os.AsyncTask;
+import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.widget.ImageView;
+import java.io.InputStream;
+import java.net.URL;
+import android.os.AsyncTask;
 
 public class MainActivity extends SuperActivity implements View.OnClickListener {
     private DrawingView drawView;
-    private ImageButton currPaint, drawBtn, eraseBtn, newBtn, saveBtn, colorBtn, undoBtn, redoBtn, shapeBtn;
+    private ImageButton currPaint, drawBtn, eraseBtn, newBtn, openBtn, saveBtn, colorBtn, undoBtn, redoBtn, shapeBtn;
     private float smallBrush, mediumBrush, largeBrush;
     private static int mColor = 0; // mColor, colorBtn
 
@@ -49,7 +58,9 @@ public class MainActivity extends SuperActivity implements View.OnClickListener 
     public static String FILEPATH = "filePath";
     public static String FILENAME = "fileName";
     private int selectedItem = 7;  // reset this value to something else
-    //private static int drawShape = 4;
+    ImageView imgView;
+    Bitmap bitmap;
+    ProgressDialog pDialog;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,6 +82,16 @@ public class MainActivity extends SuperActivity implements View.OnClickListener 
         newBtn.setOnClickListener(this);
         saveBtn = (ImageButton)findViewById(R.id.save_btn);
         saveBtn.setOnClickListener(this);
+
+        openBtn = (ImageButton)findViewById(R.id.open_btn);  // not fully what I want
+        imgView = (ImageView)findViewById(R.id.img_view);  // img_view
+        openBtn.setOnClickListener(new OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    // TODO auto-generated method stub
+                    new LoadImage().execute("http://www.learn2crack.com/wp-content/uploads/2014/04/node-cover-720x340.png");  //working
+                }
+            });
 
         // for colorBtn
         colorBtn = (ImageButton)findViewById(R.id.color_btn);
@@ -107,7 +128,6 @@ public class MainActivity extends SuperActivity implements View.OnClickListener 
 
         // for shapeBtn
         shapeBtn = (ImageButton)findViewById(R.id.shape_btn);
-
         shapeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,6 +137,32 @@ public class MainActivity extends SuperActivity implements View.OnClickListener 
         });
     }
 
+    private class LoadImage extends AsyncTask<String, String, Bitmap> {
+        @Override
+            protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(MainActivity.this);
+            pDialog.setMessage("Loading image ....");
+            pDialog.show();
+        }
+        protected Bitmap doInBackground(String... args) {
+            try {
+                bitmap = BitmapFactory.decodeStream((InputStream)new URL(args[0]).getContent());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return bitmap;
+        }
+        protected void onPostExecute(Bitmap image) {
+            if (image != null) {
+                imgView.setImageBitmap(image);
+                pDialog.dismiss();
+            } else {
+                pDialog.dismiss();
+                Toast.makeText(MainActivity.this, "Image Does Not exist or Network Error", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     @Override
     public void onClick(View view) {
@@ -421,4 +467,27 @@ public class MainActivity extends SuperActivity implements View.OnClickListener 
         fragment.show(ft, "color_picker_dialog");
     }
 }
+
+                    /*
+                    // completely working properly code
+                    ArrayList<String> listImage = new ArrayList<String>();
+                    // scan outernal image
+                    String str[] = {MediaStore.Images.Media._ID,
+                                    MediaStore.Images.Media.DISPLAY_NAME,
+                                    MediaStore.Images.Media.DATA};
+                    Cursor cursor = MainActivity.this.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, str, null, null, null);
+                    while (cursor.moveToNext()) {
+                        System.out.println(cursor.getString(0));  // pic ID
+                        System.out.println(cursor.getString(1));  // pic file name
+                        System.out.println(cursor.getString(2));  // pic path
+                        listImage.add(cursor.getString(2));
+                        new LoadImage().execute(cursor.getString(2));
+                    }
+                    */
+
+        /*  // this method is bad becuase memory comsumtive too much freeze UI
+        URL url = new URL("http://image10.bizrate-images.com/resize?sq=60&uid=2216744464");
+        Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+        imageView.setImageBitmap(bmp);                        
+        */
 

@@ -102,6 +102,8 @@
     1. Undo/Redo for simple path seem to behavor fairly ok, but instead of lineTo wired line, how do I implement smooth line? How could I differentiate different strokesizes more clear with lines I have so far?
  
     2. One little detail though, I dras after touch up, my paint color change delayed, how do I implement *real time*?
+
+       *Answered*: drawPath.reset() produced all the trouble. 
  
     3. About previous ListView six different shapes, with Undo/Redo properly functionaing, I realize I just lost my siz shapes again cause I need to rewrite/implement methods in order for them to be able to Undo/Redo ~? (My subclass works perfectly for this propose, just that I lost my internal link to primitives, which means I probably should rewrite my primitives draw methods according to undo/redo prerequirements. I don't think it will be difficult, but I don't have enough time for this for the pass week, and I need to organize my ideas about these implementation clear. )
 

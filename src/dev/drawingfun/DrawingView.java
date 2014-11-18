@@ -3,7 +3,6 @@ package dev.drawingfun;
 import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -22,17 +21,16 @@ import java.util.ArrayList;
 public class DrawingView extends View {
     private float brushSize, lastBrushSize;
     private boolean erase = false;
-    // initial color
     private int paintColor = 0xFF660000;
 
     private Path drawPath;
+    private myPath resPath;// = new myPath();
     private Paint drawPaint, canvasPaint;
     private Canvas drawCanvas;
     private Bitmap canvasBitmap;
 
-    // add ArrayList here for undo/redo
-    private ArrayList<Path> paths = new ArrayList<Path>();
-    private ArrayList<Path> undonePaths = new ArrayList<Path>();
+    private ArrayList<myPath> paths = new ArrayList<myPath>();
+    private ArrayList<myPath> undonePaths = new ArrayList<myPath>();
     private boolean isDrawing = false;
     private static float mx;
     private static float my;
@@ -49,28 +47,25 @@ public class DrawingView extends View {
     public DrawingView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        //setupDrawing();
-        // get drawing area setup for interaction
         drawPath = new Path();
         drawPaint = new Paint();
-        // set initial color
+        brushSize = getResources().getInteger(R.integer.medium_size);
+        lastBrushSize = brushSize;
+
+        resPath = new myPath();    // mine
+        resPath.mcolor = paintColor; // to solve the imitial not showing problem
+        //resPath.myPathWrap(drawPath, drawPaint, paintColor, brushSize, false);  // this one doesn't work
         drawPaint.setColor(paintColor);
-        // initial path property
-        // set anti-alias, stroke join & cap style to make drawing look smoother
         drawPaint.setAntiAlias(true);
         drawPaint.setDither(true);  // for shapes
-        //drawPaint.setStrokeWidth(20);
         drawPaint.setStrokeWidth(brushSize);
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeJoin(Paint.Join.ROUND);
         drawPaint.setStrokeCap(Paint.Cap.ROUND);
         canvasPaint = new Paint(Paint.DITHER_FLAG);
 
-        brushSize = getResources().getInteger(R.integer.medium_size);
-        lastBrushSize = brushSize;
-
         drawCanvas = new Canvas();
-        //paths.add(drawPath); // to avoid the very first not working undo
+        //paths.add(drawPath); // commented to avoid the very first not working undo
         //canvasBitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.ic_launcher); // I don't have this one
     }
 
@@ -79,8 +74,81 @@ public class DrawingView extends View {
         // view given size
         super.onSizeChanged(w, h, oldw, oldh);
 
-        canvasBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);  //1, only, doesn't work
-        drawCanvas = new Canvas(canvasBitmap);                              //2
+        //canvasBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);  //1, only, doesn't work
+        //drawCanvas = new Canvas(canvasBitmap);                              //2
+    }
+
+    public void setColor(int newColor) {
+        invalidate();
+        paintColor = newColor;
+        drawPaint.setColor(newColor);
+        resPath.mcolor = newColor;
+    }
+    public void setBrushSize(float newSize) {
+        float pixelAmount = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, newSize, getResources().getDisplayMetrics());
+        brushSize = pixelAmount;
+        drawPaint.setStrokeWidth(brushSize);
+        resPath.msize = brushSize;
+    }
+    public void setLastBrushSize(float lastSize) {
+        lastBrushSize = lastSize;
+    }
+    public float getLastBrushSize() {
+        return lastBrushSize;
+    }
+    public void setErase(boolean isErase) {
+        erase = isErase;
+        if (erase) {
+            drawPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+            //drawPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
+        } else {
+            drawPaint.setXfermode(null);
+        }
+    }
+    public void startNew() {
+        // clear the canvas and updates the display
+        drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
+        invalidate();
+    }
+
+    //@Override
+    protected void onDraw(Canvas canvas) {
+        // draw view
+        //canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);  //conflicts with previous two lines //3 not for undo/redo
+        //canvas.drawPath(drawPath, drawPaint);                                                    //4
+
+        // for undo/redo
+        for(myPath p: paths){
+            drawPaint.setColor(p.mcolor);
+            drawPaint.setStrokeWidth(p.msize);
+            canvas.drawPath(p.mpath, drawPaint);
+        }
+        //canvas.drawPath(resPath.mpath, drawPaint);   // leads to crash 1508
+        drawPaint.setColor(paintColor);
+        drawPaint.setStrokeWidth(brushSize);
+        canvas.drawPath(drawPath, drawPaint); // struggled here // no difference
+    }
+    //@Override
+    public boolean onTouchEvent(MotionEvent event) {
+        float touchX = event.getX();
+        float touchY = event.getY();
+        switch(event.getAction()) {
+        case MotionEvent.ACTION_DOWN:
+            touch_start(touchX, touchY);
+            invalidate();
+            break;
+        case MotionEvent.ACTION_MOVE:
+            touch_move(touchX, touchY);
+            invalidate();
+            break;
+        case MotionEvent.ACTION_UP:
+            touch_up();
+            invalidate();
+            break;
+        default:
+            return false;
+        }
+        return true;
     }
 
     // modified here for undo/redo
@@ -90,6 +158,9 @@ public class DrawingView extends View {
     private void touch_start(float x, float y) {
         undonePaths.clear(); //mark
         drawPath.reset();
+        // this is the part produced delay, becasu reset() set all to default;
+        drawPaint.setColor(paintColor);
+        drawPaint.setStrokeWidth(brushSize);
         drawPath.moveTo(x, y);
         mX = x;
         mY = y;
@@ -98,19 +169,24 @@ public class DrawingView extends View {
         float dx = Math.abs(x - mX);
         float dy = Math.abs(y - mY);
         if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE){
-            drawPath.quadTo(mX, mY, (x + mX)/2, (y + mY)/2);
+            //drawPath.quadTo(mX, mY, (x + mX)/2, (y + mY)/2);   // may need some work here to produce smooth line lineTo()
+            drawPath.lineTo(x, y);
             mX = x;
             mY = y;
         }
     }
     private void touch_up() {
         drawPath.lineTo(mX, mY);
+        
         // commit the path to our offscreen
-        drawCanvas.drawPath(drawPath, drawPaint);
+        drawCanvas.drawPath(drawPath, drawPaint);     // drawCanvas
+        //drawCanvas.drawPath(resPath.mpath, drawPaint);
+        
         // kill this so we don't double draw
-        paths.add(drawPath);
-        //drawPath.reset();
+        paths.add(resPath.myPathWrap(drawPath, drawPaint, resPath.mcolor, resPath.msize, false)); // color NOT work
+        
         drawPath = new Path();
+        resPath.myPathWrap(drawPath, drawPaint, resPath.mcolor, resPath.msize, false);
     }
     public void onClickUndo() {
         if (paths.size() > 0){
@@ -118,7 +194,6 @@ public class DrawingView extends View {
             invalidate();
         } else {
         }
-        // toaster the user
     }
     public void onClickRedo() {
         if (undonePaths.size() > 0){
@@ -126,93 +201,52 @@ public class DrawingView extends View {
             invalidate();
         } else {
         }
-        // toaster the user
     }
 
-    public void setColor(int newColor) {
-        invalidate();
-        drawPaint.setColor(newColor);
-    }
-    
-    public void setBrushSize(float newSize) {
-        // update size
-        float pixelAmount = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, newSize, getResources().getDisplayMetrics());
-        brushSize = pixelAmount;
-        drawPaint.setStrokeWidth(brushSize);
-    }
-
-    public void setLastBrushSize(float lastSize) {
-        lastBrushSize = lastSize;
-    }
-    public float getLastBrushSize() {
-        return lastBrushSize;
-    }
-
-    public void setErase(boolean isErase) {
-        // set erase true or false
-        erase = isErase;
-        if (erase) {
-            drawPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-            //drawPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
-        } else {
-            drawPaint.setXfermode(null);
-        }
-    }
-
-    public void startNew() {
-        // clear the canvas and updates the display
-        drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
-        invalidate();
-    }
-
-    /*
-    @Override
-    protected void onDraw(Canvas canvas) {
-        // draw view
-        canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);  //conflicts with previous two lines //3
-        canvas.drawPath(drawPath, drawPaint);                                                    //4
-
-        // for undo/redo
-        //for(Path p: paths){
-        //canvas.drawPath(p, //drawPaint);
-        //}
-        //canvas.drawPath(drawPath, drawPaint);  // in order to draw the in-progress Path
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        float touchX = event.getX();
-        float touchY = event.getY();
-        switch(event.getAction()){
-        case MotionEvent.ACTION_DOWN:
-            drawPath.moveTo(touchX, touchY);
-            break;
-        case MotionEvent.ACTION_MOVE:
-            drawPath.lineTo(touchX, touchY);
-            break;
-        case MotionEvent.ACTION_UP:
-            drawCanvas.drawPath(drawPath, drawPaint);
-            drawPath.reset();
-            break;
-        default:
-            return false;
-        }
-        invalidate(); // cause onDraw method to execute, commented for undo/redo
-        return true;
-    }
-*/
     
     //------------------------------------------------------------------------------------
     //--------- Modified Here for Shapes -------------------------------------------------
     //------------------------------------------------------------------------------------
-
-    @Override
+    /*    @Override   
+    protected void onDraw(Canvas canvas) { // want to share this method
+        for(myPath p: paths){
+            drawPaint.setColor(p.mcolor);
+            drawPaint.setStrokeWidth(p.msize);
+            canvas.drawPath(p.mpath, drawPaint);
+        }
+        canvas.drawPath(resPath.mpath, drawPaint);  //canvas.drawPath(drawPath, drawPaint); // struggled here // no difference
+    }
+    //@Override
+    public boolean onTouchEvent(MotionEvent event) {
+        float touchX = event.getX();
+        float touchY = event.getY();
+        switch(event.getAction()) {
+        case MotionEvent.ACTION_DOWN:
+            touch_start(touchX, touchY);
+            invalidate();
+            break;
+        case MotionEvent.ACTION_MOVE:
+            touch_move(touchX, touchY);
+            invalidate();
+            break;
+        case MotionEvent.ACTION_UP:
+            touch_up();
+            invalidate();
+            break;
+        default:
+            return false;
+        }
+        return true;
+    }
+    */
+                /*    @Override
     public boolean onTouchEvent(MotionEvent event) {
         mx = event.getX();
         my = event.getY();
         switch (mCurrentShape) {
+
         case 0:
-            onTouchEventRectangle(event);
+            onTouchEventRectangle(event);     // special case
             break;
         case 1:
             onTouchEventSquare(event);
@@ -228,7 +262,7 @@ public class DrawingView extends View {
             break;
         case 5:
             onTouchEventTriangle(event);
-            break;
+            break; 
         default:
             onTouchEventDefault(event);
             break;
@@ -238,10 +272,10 @@ public class DrawingView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        canvas.drawBitmap(canvasBitmap, 0, 0, drawPaint);
+        //canvas.drawBitmap(canvasBitmap, 0, 0, drawPaint);  // probably don't need this
         if (isDrawing){
             switch (mCurrentShape) {
+
             case 0:
                 onDrawRectangle(canvas);
                 break;
@@ -259,41 +293,47 @@ public class DrawingView extends View {
                 break;
             case 5:
                 onDrawTriangle(canvas);
-                break;
+                break; 
             default:
                 onDrawDefault(canvas);
                 break;
             }
         }
-    }
-
+        }  */
     //------------------------------------------------------------------
     // Default
     //------------------------------------------------------------------
+    // modify for undo/redo, these are not for undo/redo
     private boolean onTouchEventDefault(MotionEvent event) {
-        switch(event.getAction()){
+        switch(event.getAction()) {
         case MotionEvent.ACTION_DOWN:
-            drawPath.moveTo(mx, my);
+            touch_start(mx, my);
+            invalidate();
             break;
         case MotionEvent.ACTION_MOVE:
-            drawPath.lineTo(mx, my);
+            touch_move(mx, my);
+            invalidate();
             break;
         case MotionEvent.ACTION_UP:
-            drawCanvas.drawPath(drawPath, drawPaint);
-            drawPath.reset();
+            touch_up();
+            invalidate();
             break;
         default:
             return false;
         }
-        invalidate(); // cause onDraw method to execute, commented for undo/redo
         return true;
     }
-
     private void onDrawDefault(Canvas canvas) {
-        canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);  //conflicts with previous two lines //3
-        canvas.drawPath(drawPath, drawPaint);                                                    //4
-    }
-    
+        for(myPath p: paths){
+            drawPaint.setColor(p.mcolor);
+            drawPaint.setStrokeWidth(p.msize);
+            canvas.drawPath(p.mpath, drawPaint);
+        }
+        canvas.drawPath(resPath.mpath, drawPaint);  //canvas.drawPath(drawPath, drawPaint); // struggled here // no difference
+        //canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);  //conflicts with previous two lines //3
+        //canvas.drawPath(drawPath, drawPaint);                                                    //4
+    }  
+
     //------------------------------------------------------------------
     // Rectangle
     //------------------------------------------------------------------
@@ -310,17 +350,23 @@ public class DrawingView extends View {
             break;
         case MotionEvent.ACTION_UP:
             isDrawing = false;
-            //drawRectangle(drawCanvas,canvasPaint);
             drawRectangle(drawCanvas,drawPaint);
-            invalidate();
+            paths.add(resPath.myPathWrap(drawPath, drawPaint, resPath.mcolor, brushSize, false));
+            drawPath = new Path();
+            resPath.myPathWrap(drawPath, drawPaint, resPath.mcolor, brushSize, false);
             break;
         }
     }
-
     private void onDrawRectangle(Canvas canvas) {
+        for(myPath p: paths){
+            drawPaint.setColor(p.mcolor);
+            drawPaint.setStrokeWidth(p.msize);
+            //canvas.drawPath(p.mpath, drawPaint);
+            drawRectangle(canvas,drawPaint); // modify to skip this one
+        }
+        //canvas.drawPath(resPath.mpath, drawPaint); 
         drawRectangle(canvas,drawPaint);
     }
-
     private void drawRectangle(Canvas canvas,Paint paint){
         float right = mStartX > mx ? mStartX : mx;
         float left = mStartX > mx ? mx : mStartX;
@@ -350,7 +396,6 @@ public class DrawingView extends View {
         case MotionEvent.ACTION_UP:
             isDrawing = false;
             adjustSquare(mx, my);
-            //drawRectangle(drawCanvas,canvasPaint);
             drawRectangle(drawCanvas,drawPaint);
             invalidate();
             break;
@@ -386,9 +431,7 @@ public class DrawingView extends View {
             break;
         case MotionEvent.ACTION_UP:
             isDrawing = false;
-            //drawCanvas.drawCircle(mStartX, mStartY, calculateRadius(mStartX,mStartY,mx,my), canvasPaint);
             drawCanvas.drawCircle(mStartX, mStartY, calculateRadius(mStartX,mStartY,mx,my), drawPaint);
-            //calculateRadius(mStartX,mStartY,mx,my), canvasPaint);
             invalidate();
             break;
         }
@@ -424,7 +467,6 @@ public class DrawingView extends View {
             break;
         case MotionEvent.ACTION_UP:
             isDrawing = false;
-            //drawCanvas.drawLine(mStartX, mStartY, mx, my, canvasPaint);
             drawCanvas.drawLine(mStartX, mStartY, mx, my, drawPaint);
             invalidate();
             break;
@@ -460,7 +502,6 @@ public class DrawingView extends View {
         case MotionEvent.ACTION_UP:
             isDrawing = false;
             drawPath.lineTo(mStartX, mStartY);
-            //drawCanvas.drawPath(drawPath, canvasPaint);   // this one produces shadow
             drawCanvas.drawPath(drawPath, drawPaint);
             drawPath.reset();
             invalidate();
@@ -508,11 +549,8 @@ public class DrawingView extends View {
             if (countTouch<3){
                 basexTriangle=mx;
                 baseyTriangle=my;
-                //drawCanvas.drawLine(mStartX,mStartY,mx,my,canvasPaint);
                 drawCanvas.drawLine(mStartX,mStartY,mx,my,drawPaint);
             } else if (countTouch>=3){
-                //drawCanvas.drawLine(mx,my,mStartX,mStartY,canvasPaint);
-                //drawCanvas.drawLine(mx,my,basexTriangle,baseyTriangle,canvasPaint);
                 drawCanvas.drawLine(mx,my,mStartX,mStartY,drawPaint);
                 drawCanvas.drawLine(mx,my,basexTriangle,baseyTriangle,drawPaint);
                 countTouch =0;
