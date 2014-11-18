@@ -1,4 +1,4 @@
-% Created 2014-11-17 Mon 16:15
+% Created 2014-11-17 Mon 17:03
 \documentclass[9pt,b5paper]{article}
 \usepackage{graphicx}
 \usepackage{xcolor}
@@ -57,7 +57,7 @@
 \begin{itemize}
 \item \url{http://code.tutsplus.com/tutorials/android-sdk-create-a-drawing-app-interface-creation--mobile-19021}
 \end{itemize}
-\includegraphics[width=.9\linewidth]{./android_drawing_final.png}
+\includegraphics[width=.6\linewidth]{./android_drawing_final.png}
 
 \section{Checkin for 11/3/2014}
 \label{sec-2}
@@ -83,7 +83,7 @@
 \end{itemize}
 \subsection{Snapshot}
 \label{sec-2-3}
-\includegraphics[width=.9\linewidth]{./20141103.png}
+\includegraphics[width=.6\linewidth]{./20141103.png}
 
 \subsection{Todo}
 \label{sec-2-4}
@@ -124,7 +124,7 @@ refer to the reference below:
 \end{itemize}
 \subsection{Snapshot}
 \label{sec-3-3}
-\includegraphics[width=.9\linewidth]{./20141110-14-27-05.png}
+\includegraphics[width=.6\linewidth]{./20141110-14-27-05.png}
 \subsection{Special Situation}
 \label{sec-3-4}
 \begin{itemize}
@@ -157,7 +157,7 @@ refer to the reference below:
 \item The method I applied is memory saving for AsyncTask, which is better than load images directly, which could potentially block UI for couple of seconds;
 \item Loaded an image from online, but would like to try load internal images from device later on, like a drawing which I saved earlier onto my internal device;
 \item Potentially apply layer oncepts to produce multiple layer drawing, needs suggestions to organize my idea how to implement this feature.
-\item \textbf{Question}: Right now, my image is an ImageView in my layout, what ideas that I could use to set/change/transfer my ImageView to be my draw view background?
+\item \textbf{Question}: Right now, my image is an ImageView in my layout, what ideas that I could use to set/change/transfer my ImageView to be my draw view background? use Bitmap
 \item References:
 
 \url{http://www.learn2crack.com/2014/06/android-load-image-from-internet.html}
@@ -170,8 +170,8 @@ refer to the reference below:
 \subsubsection{Undo/Redo}
 \label{sec-4-2-2}
 \begin{itemize}
-\item After implemented subclass SuperActivity class which extends Activity on week checkin for 11/10/2014 for my ListView implementation, subclass of Path() was very difficult for me to think about implement before, but after my trial on ListView, super/sub class in Java all made sense to me now. It's a piece of cake, and I know I can wrap whatever material I need in order to paint nice and neat.
-\item Implemented by developing a subclass myPath to wrap the super Path(), drawPaint color, and drawPaint strokesize together as an object.
+\item After implemented subclass SuperActivity class which extends Activity on week checkin for 11/10/2014 for my ListView implementation, a wrapper class of Path() was very difficult for me to think about implement before, but after my trial on ListView, wrapper class in Java all made sense to me now. It's a piece of cake, and I know I can wrap whatever material I need in order to paint nice and neat.
+\item Implemented by packing a wrapper class myPath to wrap the Path(), drawPaint color, and drawPaint strokesize together as an object.
 \item Based on previous progress that I can undo/redo only with all the drawCanvas with the same paint color, now my updo/redo paths could be colorful and with various strokesizes.
 \item References:
 
@@ -190,7 +190,7 @@ Bitmap cacheing:
 
 \item One little detail though, I dras after touch up, my paint color change delayed, how do I implement \textbf{real time}?
 
-\textbf{Answered}: drawPath.reset() produced all the trouble.
+\textbf{Answered}: drawPath.reset() produced all the trouble. Later on, I need to think in a debuggin way/manner.
 
 \item About previous ListView six different shapes, with Undo/Redo properly functionaing, I realize I just lost my siz shapes again cause I need to rewrite/implement methods in order for them to be able to Undo/Redo \textasciitilde{}? (My subclass works perfectly for this propose, just that I lost my internal link to primitives, which means I probably should rewrite my primitives draw methods according to undo/redo prerequirements. I don't think it will be difficult, but I don't have enough time for this for the pass week, and I need to organize my ideas about these implementation clear. )
 
@@ -206,7 +206,7 @@ Bitmap cacheing:
 
 \subsection{Snapshot}
 \label{sec-4-3}
-\includegraphics[width=.9\linewidth]{./Screenshot_2014-11-17-15-11-20.png}
+\includegraphics[width=.6\linewidth]{./Screenshot_2014-11-17-15-11-20.png}
 \subsection{Todo}
 \label{sec-4-4}
 Only two button left untouched, could do the following or anything I am interested to implement. 
