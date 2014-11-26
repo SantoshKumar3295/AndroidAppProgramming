@@ -3,6 +3,68 @@
 #+title: Android App Programming Directed Study ~ DrawingFun
 #+author: Jenny Huang
 
+* first checkin 10/27/2014
+** Goal
+  - According to the instructor's requirements that we are going to implement an simple window's Paint like Android app for later on integrating Unicon's 2D graphics to Android app.
+** Course Introduction
+  - We have only two students, the other one is an udnergraduate exchange students with solid Java programming background and relatively slightly week problem-solving skills. For the first more than half semester, we used Sudoku as the starting point and tried several different topics to get our hands wet. 
+** Project Introduction
+  - It's after middle term already, the way we were currently trying on to make it work may just work perfectly for the other classmate, but for me, I feel like it takes forever for me to be able to make any significant progress. So about half a month ago, I was motivated and thought instead of surfacing around and having fun learning by trial and error, maybe I should start from an simple GUI app as a starting point and try my best to expend/extend the APP functionality from there. And also we would be able to work to our final project slightly earlier. 
+  - This GUI will be my very second GUI interface that I have ever created for my Computer Science major, (this first one was an Python Tkinter GUI one week short project for plotting graphics with data abstracted from backend database during an internship;). And I guess it may still be slightly difficult for me to start write Android App code of my own line by line, so I simply searched internet, and trying an tutorial to make a working starting point Android Paint GUI. I integrated the codes from the reference link all together, fixed minor compile errors, and it worked!
+  - This "Copied" GUI will serve as the starting point, and my functionality updates start from here, and I will update my progress for this project later on by week according to the instructor's requirements and suggestions. 
+** References
+  - http://code.tutsplus.com/tutorials/android-sdk-create-a-drawing-app-interface-creation--mobile-19021
+  [[./android_drawing_final.png]]
+
+
+
+* Checkin for 11/3/2014 
+** Buttons I have worked on
+*** Color_Picker:
+*** Undo/Redo:
+
+** Functionalities and References
+*** Color_Picker:
+  - Motivated by the Picasso Android app, seeing their multiple color choices, our starting point *12* fixed colors were too limited. 
+*** Undo/Redo Buttons:
+  - Also motivated by the Picasso app, intended to work on *Undo* button, and ended up found *Redo* button could be very convenient as well. 
+  - needs to update these Undo/Redo methods later on, this is just the starting point most basic implementation for this button set.
+** Snapshot
+[[./20141103.png]]
+
+** Todo
+*** Drawing shapes with Finger for primitives
+  refer to the reference below: 
+  - http://gmariotti.blogspot.com/2014/01/drawing-shapes-with-fingers.html
+  - This button will be first priority to finish
+*** Load image file button
+*** Erase Rectangle
+*** Undo/Redo
+* Checkin for 11/10/2014
+** Buttons I have worked on
+*** shapeBtn for primitives
+
+** Functionalities and References
+*** shapeBtn for primitives: Drawing shapes with Finger for primitives
+  - refer to the reference below for some basic shapes: line, smooth line, circle, triangle, Rectangle, square
+  - http://gmariotti.blogspot.com/2014/01/drawing-shapes-with-fingers.html
+  - *ListView* in *Alert Dialog* is searched from online without direct reference.
+  - Since the erase was using draw smooth line. This button works also means that I could erase a "*Rectangle*" shape, or "*Circle*" shape.
+  - I have other course priority for the passed week, so I just have enough time to finish this course's priority, but I will try to work harder in order to finish all the functionalities for this course.
+  - It's not a good looking ListView, but yet it's a fully functional button.
+  - This button right now is fully functional, but to finish this project first, I have not spent any quality time to expand any primitives yet, rather than the existing six ones from the reference listed below. 
+** Snapshot
+[[./20141110-14-27-05.png]]
+** Special Situation
+  - There were too many students piled/lined up in front of Dr. Jeffery's door, and he didn't break the line by stating that it's our direct study time. So the other classmate and I just stepped away from his office, and we didn't really meet during last week. 
+  - The other classmate and I have talked, and we happened to have worked on the same shapeBtn, I applied ListView in a dialog box with all six drawing shapes applied, and he created a (ListView? not sure) with a clickable button as one element with four shapes applied. And he agreeed my ListView looked way prettier than his buttons did. 
+  - But I am willing to and more than happy to think that he could have worked on something else important for him that I actually didn't have time to work on during the passed week.
+** Todo
+  - Load image file button
+  - Erase Rectangle
+  - Undo/Redo
+  - Fill paint
+
 * Checkin for 11/17/2014
 ** Buttons I have worked on
   - openBtn for loading an image file as an ImageView
@@ -64,66 +126,4 @@
   - OpenGL spinning circle
   - widely used draw methods
   - Easy draw operations
-
-* Checkin for 11/10/2014
-** Buttons I have worked on
-*** shapeBtn for primitives
-
-** Functionalities and References
-*** shapeBtn for primitives: Drawing shapes with Finger for primitives
-  - refer to the reference below for some basic shapes: line, smooth line, circle, triangle, Rectangle, square
-  - http://gmariotti.blogspot.com/2014/01/drawing-shapes-with-fingers.html
-  - *ListView* in *Alert Dialog* is searched from online without direct reference.
-  - Since the erase was using draw smooth line. This button works also means that I could erase a "*Rectangle*" shape, or "*Circle*" shape.
-  - I have other course priority for the passed week, so I just have enough time to finish this course's priority, but I will try to work harder in order to finish all the functionalities for this course.
-  - It's not a good looking ListView, but yet it's a fully functional button.
-  - This button right now is fully functional, but to finish this project first, I have not spent any quality time to expand any primitives yet, rather than the existing six ones from the reference listed below. 
-** Snapshot
-[[./20141110-14-27-05.png]]
-** Special Situation
-  - There were too many students piled/lined up in front of Dr. Jeffery's door, and he didn't break the line by stating that it's our direct study time. So the other classmate and I just stepped away from his office, and we didn't really meet during last week. 
-  - The other classmate and I have talked, and we happened to have worked on the same shapeBtn, I applied ListView in a dialog box with all six drawing shapes applied, and he created a (ListView? not sure) with a clickable button as one element with four shapes applied. And he agreeed my ListView looked way prettier than his buttons did. 
-  - But I am willing to and more than happy to think that he could have worked on something else important for him that I actually didn't have time to work on during the passed week.
-** Todo
-  - Load image file button
-  - Erase Rectangle
-  - Undo/Redo
-  - Fill paint
-
-* Checkin for 11/3/2014 
-** Buttons I have worked on
-*** Color_Picker:
-*** Undo/Redo:
-
-** Functionalities and References
-*** Color_Picker:
-  - Motivated by the Picasso Android app, seeing their multiple color choices, our starting point *12* fixed colors were too limited. 
-*** Undo/Redo Buttons:
-  - Also motivated by the Picasso app, intended to work on *Undo* button, and ended up found *Redo* button could be very convenient as well. 
-  - needs to update these Undo/Redo methods later on, this is just the starting point most basic implementation for this button set.
-** Snapshot
-[[./20141103.png]]
-
-** Todo
-*** Drawing shapes with Finger for primitives
-  refer to the reference below: 
-  - http://gmariotti.blogspot.com/2014/01/drawing-shapes-with-fingers.html
-  - This button will be first priority to finish
-*** Load image file button
-*** Erase Rectangle
-*** Undo/Redo
-* first checkin 10/27/2014
-** Goal
-  - According to the instructor's requirements that we are going to implement an simple window's Paint like Android app for later on integrating Unicon's 2D graphics to Android app.
-** Course Introduction
-  - We have only two students, the other one is an udnergraduate exchange students with solid Java programming background and relatively slightly week problem-solving skills. For the first more than half semester, we used Sudoku as the starting point and tried several different topics to get our hands wet. 
-** Project Introduction
-  - It's after middle term already, the way we were currently trying on to make it work may just work perfectly for the other classmate, but for me, I feel like it takes forever for me to be able to make any significant progress. So about half a month ago, I was motivated and thought instead of surfacing around and having fun learning by trial and error, maybe I should start from an simple GUI app as a starting point and try my best to expend/extend the APP functionality from there. And also we would be able to work to our final project slightly earlier. 
-  - This GUI will be my very second GUI interface that I have ever created for my Computer Science major, (this first one was an Python Tkinter GUI one week short project for plotting graphics with data abstracted from backend database during an internship;). And I guess it may still be slightly difficult for me to start write Android App code of my own line by line, so I simply searched internet, and trying an tutorial to make a working starting point Android Paint GUI. I integrated the codes from the reference link all together, fixed minor compile errors, and it worked!
-  - This "Copied" GUI will serve as the starting point, and my functionality updates start from here, and I will update my progress for this project later on by week according to the instructor's requirements and suggestions. 
-** References
-  - http://code.tutsplus.com/tutorials/android-sdk-create-a-drawing-app-interface-creation--mobile-19021
-  [[./android_drawing_final.png]]
-
-
 
