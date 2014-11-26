@@ -3,42 +3,67 @@
 #+title: Android App Programming Directed Study ~ DrawingFun
 #+author: Jenny Huang
 
-* first checkin 10/27/2014
-** Goal
-  - According to the instructor's requirements that we are going to implement an simple window's Paint like Android app for later on integrating Unicon's 2D graphics to Android app.
-** Course Introduction
-  - We have only two students, the other one is an udnergraduate exchange students with solid Java programming background and relatively slightly week problem-solving skills. For the first more than half semester, we used Sudoku as the starting point and tried several different topics to get our hands wet. 
-** Project Introduction
-  - It's after middle term already, the way we were currently trying on to make it work may just work perfectly for the other classmate, but for me, I feel like it takes forever for me to be able to make any significant progress. So about half a month ago, I was motivated and thought instead of surfacing around and having fun learning by trial and error, maybe I should start from an simple GUI app as a starting point and try my best to expend/extend the APP functionality from there. And also we would be able to work to our final project slightly earlier. 
-  - This GUI will be my very second GUI interface that I have ever created for my Computer Science major, (this first one was an Python Tkinter GUI one week short project for plotting graphics with data abstracted from backend database during an internship;). And I guess it may still be slightly difficult for me to start write Android App code of my own line by line, so I simply searched internet, and trying an tutorial to make a working starting point Android Paint GUI. I integrated the codes from the reference link all together, fixed minor compile errors, and it worked!
-  - This "Copied" GUI will serve as the starting point, and my functionality updates start from here, and I will update my progress for this project later on by week according to the instructor's requirements and suggestions. 
-** References
-  - http://code.tutsplus.com/tutorials/android-sdk-create-a-drawing-app-interface-creation--mobile-19021
-  [[./android_drawing_final.png]]
-
-* Checkin for 11/3/2014 
+* Checkin for 11/17/2014
 ** Buttons I have worked on
-*** Color_Picker:
-*** Undo/Redo:
-
+  - openBtn for loading an image file as an ImageView
+  - Undo/Redo
 ** Functionalities and References
-*** Color_Picker:
-  - Motivated by the Picasso Android app, seeing their multiple color choices, our starting point *12* fixed colors were too limited. 
-*** Undo/Redo Buttons:
-  - Also motivated by the Picasso app, intended to work on *Undo* button, and ended up found *Redo* button could be very convenient as well. 
-  - needs to update these Undo/Redo methods later on, this is just the starting point most basic implementation for this button set.
-** Snapshot
-[[./20141103.png]]
+*** openBtn for loading an image file as an ImageView
+  - The method I applied is memory saving for AsyncTask, which is better than load images directly, which could potentially block UI for couple of seconds;
+  - Loaded an image from online, but would like to try load internal images from device later on, like a drawing which I saved earlier onto my internal device;
+  - Potentially apply layer oncepts to produce multiple layer drawing, needs suggestions to organize my idea how to implement this feature.
+  - *Question*: Right now, my image is an ImageView in my layout, what ideas that I could use to set/change/transfer my ImageView to be my draw view background?
+  - References:
+    
+    http://www.learn2crack.com/2014/06/android-load-image-from-internet.html
 
-** Todo
-*** Drawing shapes with Finger for primitives
-  refer to the reference below: 
-  - http://gmariotti.blogspot.com/2014/01/drawing-shapes-with-fingers.html
-  - This button will be first priority to finish
-*** Load image file button
-*** Erase Rectangle
+    http://stackoverflow.com/questions/5776851/load-image-from-url
+
+    https://github.com/koush/UrlImageViewHelper
+
 *** Undo/Redo
+  - After implemented subclass SuperActivity class which extends Activity on week checkin for 11/10/2014 for my ListView implementation, subclass of Path() was very difficult for me to think about implement before, but after my trial on ListView, super/sub class in Java all made sense to me now. It's a piece of cake, and I know I can wrap whatever material I need in order to paint nice and neat. 
+  - Implemented by developing a subclass myPath to wrap the super Path(), drawPaint color, and drawPaint strokesize together as an object. 
+  - Based on previous progress that I can undo/redo only with all the drawCanvas with the same paint color, now my updo/redo paths could be colorful and with various strokesizes. 
+  - References:
 
+    Path() library:
+
+    http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/2.3.1_r1/android/graphics/Path.java
+    
+    Bitmap cacheing:
+
+    http://stackoverflow.com/questions/3406910/efficient-2d-drawing-in-android/3408641#3408641
+
+  - *Questions*: 
+
+    1. Undo/Redo for simple path seem to behavor fairly ok, but instead of lineTo wired line, how do I implement smooth line? How could I differentiate different strokesizes more clear with lines I have so far?
+ 
+    2. One little detail though, I dras after touch up, my paint color change delayed, how do I implement *real time*?
+
+       *Answered*: drawPath.reset() produced all the trouble. 
+ 
+    3. About previous ListView six different shapes, with Undo/Redo properly functionaing, I realize I just lost my siz shapes again cause I need to rewrite/implement methods in order for them to be able to Undo/Redo ~? (My subclass works perfectly for this propose, just that I lost my internal link to primitives, which means I probably should rewrite my primitives draw methods according to undo/redo prerequirements. I don't think it will be difficult, but I don't have enough time for this for the pass week, and I need to organize my ideas about these implementation clear. )
+
+   4. I prioritize undo/redo to be more important than any other buttons cause I know they would give me great practise together with primitives implementation methods rewrite. So I have not touch "Erase Rectangle" button and "paint fill" button yet. According to these idea, I would prioritize Rectangle rewrite with the highest priority, so that later on I can follow up with erase Rectangle (which means draw Rectangle first, fill with background color, and undo could remove this erase step). Correct me if I am wrong. 
+
+*** References: all about Android
+  - https://github.com/kesenhoo/android-training-course-in-chinese
+
+** Snapshot
+[[./Screenshot_2014-11-17-15-11-20.png]]
+** Todo
+  Only two button left untouched, could do the following or anything I am interested to implement. 
+  - Erase Rectangle
+  - Fill paint
+
+  Potential interests: may implement depends on how I spend thanksgiving ~~
+  - touch ImageView Activities: zoomin, zoomout, rotate, fading, etc
+  - SurfaceView rotate images through new thread
+  - canvas save() and restore()
+  - OpenGL spinning circle
+  - widely used draw methods
+  - Easy draw operations
 
 * Checkin for 11/10/2014
 ** Buttons I have worked on
@@ -65,65 +90,40 @@
   - Undo/Redo
   - Fill paint
 
-* Checkin for 11/17/2014
+* Checkin for 11/3/2014 
 ** Buttons I have worked on
-  - openBtn for loading an image file as an ImageView
-  - Undo/Redo
+*** Color_Picker:
+*** Undo/Redo:
+
 ** Functionalities and References
-*** openBtn for loading an image file as an ImageView
-  - The method I applied is memory saving for AsyncTask, which is better than load images directly, which could potentially block UI for couple of seconds;
-  - Loaded an image from online, but would like to try load internal images from device later on, like a drawing which I saved earlier onto my internal device;
-  - Potentially apply layer oncepts to produce multiple layer drawing, needs suggestions to organize my idea how to implement this feature.
-  - *Question*: Right now, my image is an ImageView in my layout, what ideas that I could use to set/change/transfer my ImageView to be my draw view background? use Bitmap
-  - References:
-    
-    http://www.learn2crack.com/2014/06/android-load-image-from-internet.html
-
-    http://stackoverflow.com/questions/5776851/load-image-from-url
-
-    https://github.com/koush/UrlImageViewHelper
-
-*** Undo/Redo
-  - After implemented subclass SuperActivity class which extends Activity on week checkin for 11/10/2014 for my ListView implementation, a wrapper class of Path() was very difficult for me to think about implement before, but after my trial on ListView, wrapper class in Java all made sense to me now. It's a piece of cake, and I know I can wrap whatever material I need in order to paint nice and neat. 
-  - Implemented by packing a wrapper class myPath to wrap the Path(), drawPaint color, and drawPaint strokesize together as an object. 
-  - Based on previous progress that I can undo/redo only with all the drawCanvas with the same paint color, now my updo/redo paths could be colorful and with various strokesizes. 
-  - References:
-
-    Path() library:
-
-    http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/2.3.1_r1/android/graphics/Path.java
-    
-    Bitmap cacheing:
-
-    http://stackoverflow.com/questions/3406910/efficient-2d-drawing-in-android/3408641#3408641
-
-  - *Questions*: 
-
-    1. Undo/Redo for simple path seem to behavor fairly ok, but instead of lineTo wired line, how do I implement smooth line? How could I differentiate different strokesizes more clear with lines I have so far?
- 
-    2. One little detail though, I dras after touch up, my paint color change delayed, how do I implement *real time*?
-
-       *Answered*: drawPath.reset() produced all the trouble. Later on, I need to think in a debuggin way/manner. 
- 
-    3. About previous ListView six different shapes, with Undo/Redo properly functionaing, I realize I just lost my siz shapes again cause I need to rewrite/implement methods in order for them to be able to Undo/Redo ~? (My subclass works perfectly for this propose, just that I lost my internal link to primitives, which means I probably should rewrite my primitives draw methods according to undo/redo prerequirements. I don't think it will be difficult, but I don't have enough time for this for the pass week, and I need to organize my ideas about these implementation clear. )
-
-   4. I prioritize undo/redo to be more important than any other buttons cause I know they would give me great practise together with primitives implementation methods rewrite. So I have not touch "Erase Rectangle" button and "paint fill" button yet. According to these idea, I would prioritize Rectangle rewrite with the highest priority, so that later on I can follow up with erase Rectangle (which means draw Rectangle first, fill with background color, and undo could remove this erase step). Correct me if I am wrong. 
-
-*** References: all about Android
-  - https://github.com/kesenhoo/android-training-course-in-chinese
-
+*** Color_Picker:
+  - Motivated by the Picasso Android app, seeing their multiple color choices, our starting point *12* fixed colors were too limited. 
+*** Undo/Redo Buttons:
+  - Also motivated by the Picasso app, intended to work on *Undo* button, and ended up found *Redo* button could be very convenient as well. 
+  - needs to update these Undo/Redo methods later on, this is just the starting point most basic implementation for this button set.
 ** Snapshot
-[[./Screenshot_2014-11-17-15-11-20.png]]
-** Todo
-  Only two button left untouched, could do the following or anything I am interested to implement. 
-  - Erase Rectangle
-  - Fill paint
+[[./20141103.png]]
 
-  Potential interests: may implement depends on how I spend thanksgiving ~~
-  - touch ImageView Activities: zoomin, zoomout, rotate, fading, etc
-  - SurfaceView rotate images through new thread
-  - canvas save() and restore()
-  - OpenGL spinning circle
-  - widely used draw methods
-  - Easy draw operations
+** Todo
+*** Drawing shapes with Finger for primitives
+  refer to the reference below: 
+  - http://gmariotti.blogspot.com/2014/01/drawing-shapes-with-fingers.html
+  - This button will be first priority to finish
+*** Load image file button
+*** Erase Rectangle
+*** Undo/Redo
+* first checkin 10/27/2014
+** Goal
+  - According to the instructor's requirements that we are going to implement an simple window's Paint like Android app for later on integrating Unicon's 2D graphics to Android app.
+** Course Introduction
+  - We have only two students, the other one is an udnergraduate exchange students with solid Java programming background and relatively slightly week problem-solving skills. For the first more than half semester, we used Sudoku as the starting point and tried several different topics to get our hands wet. 
+** Project Introduction
+  - It's after middle term already, the way we were currently trying on to make it work may just work perfectly for the other classmate, but for me, I feel like it takes forever for me to be able to make any significant progress. So about half a month ago, I was motivated and thought instead of surfacing around and having fun learning by trial and error, maybe I should start from an simple GUI app as a starting point and try my best to expend/extend the APP functionality from there. And also we would be able to work to our final project slightly earlier. 
+  - This GUI will be my very second GUI interface that I have ever created for my Computer Science major, (this first one was an Python Tkinter GUI one week short project for plotting graphics with data abstracted from backend database during an internship;). And I guess it may still be slightly difficult for me to start write Android App code of my own line by line, so I simply searched internet, and trying an tutorial to make a working starting point Android Paint GUI. I integrated the codes from the reference link all together, fixed minor compile errors, and it worked!
+  - This "Copied" GUI will serve as the starting point, and my functionality updates start from here, and I will update my progress for this project later on by week according to the instructor's requirements and suggestions. 
+** References
+  - http://code.tutsplus.com/tutorials/android-sdk-create-a-drawing-app-interface-creation--mobile-19021
+  [[./android_drawing_final.png]]
+
+
 
