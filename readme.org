@@ -119,6 +119,8 @@
   - Erase Rectangle
   - Fill paint
 
+  May try to *save* into Galaxy... as Dr. Jeffery mentioned it last time when we meet during class;
+
   Potential interests: may implement depends on how I spend thanksgiving ~~
   - touch ImageView Activities: zoomin, zoomout, rotate, fading, etc
   - SurfaceView rotate images through new thread
