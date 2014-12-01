@@ -1,4 +1,4 @@
-% Created 2014-11-28 Fri 12:27
+% Created 2014-12-01 Mon 15:34
 \documentclass[9pt,b5paper]{article}
 \usepackage{graphicx}
 \usepackage{xcolor}
@@ -58,8 +58,6 @@
 \item \url{http://code.tutsplus.com/tutorials/android-sdk-create-a-drawing-app-interface-creation--mobile-19021}
 \end{itemize}
 \includegraphics[width=.9\linewidth]{./android_drawing_final.png}
-
-
 
 \section{Checkin for 11/3/2014}
 \label{sec-2}
@@ -225,6 +223,70 @@ Potential interests: may implement depends on how I spend thanksgiving \textasci
 \item OpenGL spinning circle
 \item widely used draw methods
 \item Easy draw operations
+\end{itemize}
+
+\section{Checkin for 12/01/2014}
+\label{sec-5}
+\subsection{Buttons I have worked on}
+\label{sec-5-1}
+\begin{itemize}
+\item ImageView to Bitmap:
+\item start newBtn
+\item Undo/Redo
+\end{itemize}
+\subsection{Functionalities and References}
+\label{sec-5-2}
+\subsubsection{ImageView to Bitmap:}
+\label{sec-5-2-1}
+\begin{itemize}
+\item Worked on Bitmap so that I can load a picture as my drawView background;
+\item Could try to add user options to different background pictures later on;
+\end{itemize}
+\subsubsection{start newBtn}
+\label{sec-5-2-2}
+\begin{itemize}
+\item Realized becuase I didn't use Bitmap during last checkin, my newBtn lost its functionality, and I fixed it by writing to Bitmap;
+\item The wired drawing path shapes got Corrected as well by writing to Bitmap;
+\item References: mutuable immutable bitmaps
+\url{http://stackoverflow.com/questions/13119582/android-immutable-bitmap-crash-error}
+\item But I still failed to start new because the error of the \textbf{ViewRootImpl sendUserActionEvent() mView == null}
+\item I googled the answers that
+\begin{itemize}
+\item \url{http://stackoverflow.com/questions/18028666/senduseractionevent-is-null}
+\item startActivity(new Intent(Settings.ACTION$_{\text{ADD}}$$_{\text{ACCOUNT}}$));
+\item I uninstalled the app and restart, the error was still there
+\item I have \textbf{difficulty} to solve this one;
+\end{itemize}
+\end{itemize}
+\subsubsection{Undo/Redo}
+\label{sec-5-2-3}
+\begin{itemize}
+\item Still got confused why I will have to wrap my ListView items into different objects (because I want undo/redo not only Path, but also \textbf{RectF} etc?)
+\item How do I enum \textbf{Objects} instead of Java data types
+\item If I really don't want to separate/pack my ListView items into objects, will it be possible for me to use command pattern instead, and how difficult could command pattern to be comparatively spearking?
+\item References:
+List: 
+\begin{itemize}
+\item \url{http://stackoverflow.com/questions/11114625/android-canvas-redo-and-undo-operation}
+\end{itemize}
+Command Pattern:
+\begin{itemize}
+\item \url{http://www.28im.com/android/a141932.html}
+\item \url{http://www.javaworld.com/article/2077569/core-java/java-tip-68--learn-how-to-implement-the-command-pattern-in-java.html}
+\item \url{http://www.28im.com/android/a141932.html}
+\item \url{http://blog.csdn.net/lovingprince/article/details/1532869}
+\item \url{http://www.2cto.com/kf/201409/333267.html}
+\item \url{http://www.2cto.com/kf/201406/309574.html}
+\item \url{http://blog.csdn.net/rhljiayou/article/details/7212620}
+\end{itemize}
+\end{itemize}
+\subsection{Snapshot}
+\label{sec-5-3}
+\includegraphics[width=.9\linewidth]{./Screenshot_2014-12-01-15-32-21.png}
+\subsection{Todo}
+\label{sec-5-4}
+\begin{itemize}
+\item listen to the instructor
 \end{itemize}
 % Emacs 24.3.1 (Org mode 8.2.7c)
 \end{document}

@@ -14,6 +14,7 @@
   <string name="fill">Fill</string>
   <string name="undo">Undo</string>
   <string name="redo">Redo</string>
+  <string name="clear">Clear</string>
 
   <string name="hue_view_content_desc">Hue image</string>
   <string name="hue_cursor_content_desc">Hue image cursor</string>

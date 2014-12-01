@@ -166,7 +166,7 @@ public class MainActivity extends SuperActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.draw_btn) {
+       if (view.getId() == R.id.draw_btn) {
             final Dialog brushDialog = new Dialog(this);
             brushDialog.setTitle("Brush size:");
             brushDialog.setContentView(R.layout.brush_chooser);
@@ -245,7 +245,8 @@ public class MainActivity extends SuperActivity implements View.OnClickListener 
             newDialog.setMessage("Start new drawing (you will lose the current drawing)?");
             newDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int which) {
-                        drawView.startNew();
+                        //drawView.startNew();
+                        drawView.clear();
                         dialog.dismiss();
                     }
                 });
@@ -273,9 +274,8 @@ public class MainActivity extends SuperActivity implements View.OnClickListener 
                 });
             saveDialog.show();
 
-            // attemp to write the image to a file
-            String imgSaved = MediaStore.Images.Media.insertImage(getContentResolver(), drawView.getDrawingCache(),
-                                                                  UUID.randomUUID().toString()+".png", "drawing");
+            // attemp to write the image to a file, it is in the "Gallery" already
+            String imgSaved = MediaStore.Images.Media.insertImage(getContentResolver(), drawView.getDrawingCache(), UUID.randomUUID().toString()+".png", "drawing");
             // give user feedback
             if (imgSaved != null){
                 Toast savedToast = Toast.makeText(getApplicationContext(), "Drawing saved to Gallery!", Toast.LENGTH_SHORT);

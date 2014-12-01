@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -21,14 +22,18 @@ import java.util.ArrayList;
 public class DrawingView extends View {
     private float brushSize, lastBrushSize;
     private boolean erase = false;
+    private boolean isClear = false;
+    
     private int paintColor = 0xFF660000;
-
     private Path drawPath;
     private myPath resPath;// = new myPath();
     private Paint drawPaint, canvasPaint;
     private Canvas drawCanvas;
-    private Bitmap canvasBitmap;
-
+    private Bitmap brightBitmap;
+    private Bitmap bridgeBitmap;
+    private Bitmap originalBitmap = null;
+    private Bitmap canvasBitmap = null;
+    private Bitmap new2Bitmap = null;
     private ArrayList<myPath> paths = new ArrayList<myPath>();
     private ArrayList<myPath> undonePaths = new ArrayList<myPath>();
     private boolean isDrawing = false;
@@ -36,6 +41,7 @@ public class DrawingView extends View {
     private static float my;
     private static float mStartX;
     private static float mStartY;
+    private float touchX, touchY;
     private static int mCurrentShape;
 
     public void setmCurrentShape(int x) {
@@ -43,15 +49,42 @@ public class DrawingView extends View {
             mCurrentShape = x;
         }
     }
+
+    public void clear() {
+        isClear = true;
+        new2Bitmap = originalBitmap;
+        //new2Bitmap = bridgeBitmap.copy(Bitmap.Config.ARGB_8888, true);    // original 
+        invalidate();
+    }
+    public Bitmap HandWriting(Bitmap oriBitmap) {    
+        Canvas canvas = null;
+        if (isClear) {
+            canvas = new Canvas(new2Bitmap);
+        } else {        
+            canvas = new Canvas(oriBitmap);
+        }
+        drawPaint = new Paint();
+        drawPaint.setStyle(Paint.Style.STROKE);
+        drawPaint.setAntiAlias(true);
+        drawPaint.setColor(paintColor);
+        drawPaint.setStrokeWidth(brushSize);
+        if (isDrawing) {
+            canvas.drawLine(mStartX, mStartY, touchX, touchY, drawPaint);
+        }
+        mStartX = touchX;
+        mStartY = touchY;
+        if(isClear){
+            return new2Bitmap;
+        }
+        return oriBitmap;
+    }
     
     public DrawingView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
         drawPath = new Path();
         drawPaint = new Paint();
         brushSize = getResources().getInteger(R.integer.medium_size);
         lastBrushSize = brushSize;
-
         resPath = new myPath();    // mine
         resPath.mcolor = paintColor; // to solve the imitial not showing problem
         //resPath.myPathWrap(drawPath, drawPaint, paintColor, brushSize, false);  // this one doesn't work
@@ -66,16 +99,13 @@ public class DrawingView extends View {
 
         drawCanvas = new Canvas();
         //paths.add(drawPath); // commented to avoid the very first not working undo
-        //canvasBitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.ic_launcher); // I don't have this one
-    }
-
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        // view given size
-        super.onSizeChanged(w, h, oldw, oldh);
-
-        //canvasBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);  //1, only, doesn't work
-        //drawCanvas = new Canvas(canvasBitmap);                              //2
+        //brightBitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.ic_launcher);
+        brightBitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.rose);
+        //brightBitmap = Bitmap.createScaledBitmap(brightBitmap, 550, 550, false); // don't like this huge stupid one
+        //canvasBitmap = Bitmap.createBitmap(originalBitmap); // it is immutable bitmap, needs a mutable one
+        bridgeBitmap = Bitmap.createBitmap(brightBitmap);
+        originalBitmap = bridgeBitmap.copy(Bitmap.Config.ARGB_8888, true);    // original 
+        canvasBitmap = bridgeBitmap.copy(Bitmap.Config.ARGB_8888, true);  // keep using
     }
 
     public void setColor(int newColor) {
@@ -111,12 +141,21 @@ public class DrawingView extends View {
         invalidate();
     }
 
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        // view given size
+        super.onSizeChanged(w, h, oldw, oldh);
+
+        //canvasBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);  //1, only, doesn't work
+        //drawCanvas = new Canvas(canvasBitmap);                              //2
+    }
+
     //@Override
     protected void onDraw(Canvas canvas) {
         // draw view
-        //canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);  //conflicts with previous two lines //3 not for undo/redo
-        //canvas.drawPath(drawPath, drawPaint);                                                    //4
+        canvas.drawBitmap(HandWriting(canvasBitmap), 0, 0, canvasPaint);  //conflicts with previous two lines //3 not for undo/redo
 
+        //canvas.drawPath(drawPath, drawPaint);                                                    //4
         // for undo/redo
         for(myPath p: paths){
             drawPaint.setColor(p.mcolor);
@@ -125,13 +164,13 @@ public class DrawingView extends View {
         }
         //canvas.drawPath(resPath.mpath, drawPaint);   // leads to crash 1508
         drawPaint.setColor(paintColor);
-        drawPaint.setStrokeWidth(brushSize);
-        canvas.drawPath(drawPath, drawPaint); // struggled here // no difference
+        drawPaint.setStrokeWidth(brushSize);  
+        canvas.drawPath(drawPath, drawPaint); // struggled here
     }
     //@Override
     public boolean onTouchEvent(MotionEvent event) {
-        float touchX = event.getX();
-        float touchY = event.getY();
+         touchX = event.getX();
+         touchY = event.getY();
         switch(event.getAction()) {
         case MotionEvent.ACTION_DOWN:
             touch_start(touchX, touchY);
@@ -208,98 +247,98 @@ public class DrawingView extends View {
     //--------- Modified Here for Shapes -------------------------------------------------
     //------------------------------------------------------------------------------------
     /*    @Override   
-    protected void onDraw(Canvas canvas) { // want to share this method
-        for(myPath p: paths){
-            drawPaint.setColor(p.mcolor);
-            drawPaint.setStrokeWidth(p.msize);
-            canvas.drawPath(p.mpath, drawPaint);
-        }
-        canvas.drawPath(resPath.mpath, drawPaint);  //canvas.drawPath(drawPath, drawPaint); // struggled here // no difference
-    }
-    //@Override
-    public boolean onTouchEvent(MotionEvent event) {
-        float touchX = event.getX();
-        float touchY = event.getY();
-        switch(event.getAction()) {
-        case MotionEvent.ACTION_DOWN:
-            touch_start(touchX, touchY);
-            invalidate();
-            break;
-        case MotionEvent.ACTION_MOVE:
-            touch_move(touchX, touchY);
-            invalidate();
-            break;
-        case MotionEvent.ACTION_UP:
-            touch_up();
-            invalidate();
-            break;
-        default:
-            return false;
-        }
-        return true;
-    }
+          protected void onDraw(Canvas canvas) { // want to share this method
+          for(myPath p: paths){
+          drawPaint.setColor(p.mcolor);
+          drawPaint.setStrokeWidth(p.msize);
+          canvas.drawPath(p.mpath, drawPaint);
+          }
+          canvas.drawPath(resPath.mpath, drawPaint);  //canvas.drawPath(drawPath, drawPaint); // struggled here // no difference
+          }
+          //@Override
+          public boolean onTouchEvent(MotionEvent event) {
+          float touchX = event.getX();
+          float touchY = event.getY();
+          switch(event.getAction()) {
+          case MotionEvent.ACTION_DOWN:
+          touch_start(touchX, touchY);
+          invalidate();
+          break;
+          case MotionEvent.ACTION_MOVE:
+          touch_move(touchX, touchY);
+          invalidate();
+          break;
+          case MotionEvent.ACTION_UP:
+          touch_up();
+          invalidate();
+          break;
+          default:
+          return false;
+          }
+          return true;
+          }
     */
-                /*    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        mx = event.getX();
-        my = event.getY();
-        switch (mCurrentShape) {
+    /*    @Override
+          public boolean onTouchEvent(MotionEvent event) {
+          mx = event.getX();
+          my = event.getY();
+          switch (mCurrentShape) {
 
-        case 0:
-            onTouchEventRectangle(event);     // special case
-            break;
-        case 1:
-            onTouchEventSquare(event);
-            break;
-        case 2:
-            onTouchEventCircle(event);
-            break;
-        case 3:
-            onTouchEventLine(event);
-            break;
-        case 4:
-            onTouchEventSmoothLine(event);
-            break;
-        case 5:
-            onTouchEventTriangle(event);
-            break; 
-        default:
-            onTouchEventDefault(event);
-            break;
-        }
-        return true;
-    }
+          case 0:
+          onTouchEventRectangle(event);     // special case
+          break;
+          case 1:
+          onTouchEventSquare(event);
+          break;
+          case 2:
+          onTouchEventCircle(event);
+          break;
+          case 3:
+          onTouchEventLine(event);
+          break;
+          case 4:
+          onTouchEventSmoothLine(event);
+          break;
+          case 5:
+          onTouchEventTriangle(event);
+          break; 
+          default:
+          onTouchEventDefault(event);
+          break;
+          }
+          return true;
+          }
 
-    @Override
-    protected void onDraw(Canvas canvas) {
-        //canvas.drawBitmap(canvasBitmap, 0, 0, drawPaint);  // probably don't need this
-        if (isDrawing){
-            switch (mCurrentShape) {
+          @Override
+          protected void onDraw(Canvas canvas) {
+          //canvas.drawBitmap(canvasBitmap, 0, 0, drawPaint);  // probably don't need this
+          if (isDrawing){
+          switch (mCurrentShape) {
 
-            case 0:
-                onDrawRectangle(canvas);
-                break;
-            case 1:
-                onDrawSquare(canvas);
-                break;
-            case 2:
-                onDrawCircle(canvas);
-                break;
-            case 3:
-                onDrawLine(canvas);
-                break;
-            case 4:
-                onDrawLine(canvas);
-                break;
-            case 5:
-                onDrawTriangle(canvas);
-                break; 
-            default:
-                onDrawDefault(canvas);
-                break;
-            }
-        }
-        }  */
+          case 0:
+          onDrawRectangle(canvas);
+          break;
+          case 1:
+          onDrawSquare(canvas);
+          break;
+          case 2:
+          onDrawCircle(canvas);
+          break;
+          case 3:
+          onDrawLine(canvas);
+          break;
+          case 4:
+          onDrawLine(canvas);
+          break;
+          case 5:
+          onDrawTriangle(canvas);
+          break; 
+          default:
+          onDrawDefault(canvas);
+          break;
+          }
+          }
+          }  */
     //------------------------------------------------------------------
     // Default
     //------------------------------------------------------------------

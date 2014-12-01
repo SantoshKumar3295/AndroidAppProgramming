@@ -16,8 +16,6 @@
   - http://code.tutsplus.com/tutorials/android-sdk-create-a-drawing-app-interface-creation--mobile-19021
   [[./android_drawing_final.png]]
 
-
-
 * Checkin for 11/3/2014 
 ** Buttons I have worked on
 *** Color_Picker:
@@ -129,3 +127,42 @@
   - widely used draw methods
   - Easy draw operations
 
+* Checkin for 12/01/2014
+** Buttons I have worked on
+  - ImageView to Bitmap:
+  - start newBtn
+  - Undo/Redo
+** Functionalities and References
+*** ImageView to Bitmap:
+- Worked on Bitmap so that I can load a picture as my drawView background;
+- Could try to add user options to different background pictures later on;
+*** start newBtn
+- Realized becuase I didn't use Bitmap during last checkin, my newBtn lost its functionality, and I fixed it by writing to Bitmap;
+- The wired drawing path shapes got Corrected as well by writing to Bitmap;
+- References: mutuable immutable bitmaps
+  http://stackoverflow.com/questions/13119582/android-immutable-bitmap-crash-error
+- But I still failed to start new because the error of the *ViewRootImpl sendUserActionEvent() mView == null*
+- I googled the answers that
+  - http://stackoverflow.com/questions/18028666/senduseractionevent-is-null
+  - startActivity(new Intent(Settings.ACTION_ADD_ACCOUNT));
+  - I uninstalled the app and restart, the error was still there
+  - I have *difficulty* to solve this one;
+*** Undo/Redo
+- Still got confused why I will have to wrap my ListView items into different objects (because I want undo/redo not only Path, but also *RectF* etc?)
+- How do I enum *Objects* instead of Java data types
+- If I really don't want to separate/pack my ListView items into objects, will it be possible for me to use command pattern instead, and how difficult could command pattern to be comparatively spearking?
+- References:
+  List: 
+  - http://stackoverflow.com/questions/11114625/android-canvas-redo-and-undo-operation
+  Command Pattern:
+  - http://www.28im.com/android/a141932.html
+  - http://www.javaworld.com/article/2077569/core-java/java-tip-68--learn-how-to-implement-the-command-pattern-in-java.html
+  - http://www.28im.com/android/a141932.html
+  - http://blog.csdn.net/lovingprince/article/details/1532869
+  - http://www.2cto.com/kf/201409/333267.html
+  - http://www.2cto.com/kf/201406/309574.html
+  - http://blog.csdn.net/rhljiayou/article/details/7212620
+** Snapshot
+[[./Screenshot_2014-12-01-15-32-21.png]]
+** Todo
+- listen to the instructor

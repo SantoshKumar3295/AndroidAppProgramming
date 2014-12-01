@@ -11,6 +11,74 @@
       android:layout_height="50dp"
       android:layout_gravity="center"
       android:orientation="horizontal" >
+
+    <ImageButton
+	android:id="@+id/new_btn"
+	android:layout_width="50dp"
+	android:layout_height="50dp"
+	android:contentDescription="@string/start_new"
+	android:src="@drawable/new_pic" />
+    <ImageButton
+	android:id="@+id/open_btn"
+	android:layout_width="50dp"
+	android:layout_height="50dp"
+	android:contentDescription="@string/open"
+	android:src="@drawable/open" />
+    <ImageButton
+	android:id="@+id/draw_btn"
+	android:layout_width="50dp"
+	android:layout_height="50dp"
+	android:contentDescription="@string/brush"
+	android:src="@drawable/brush" />
+    <ImageButton
+	android:id="@+id/color_btn"
+	android:layout_width="50dp"
+	android:layout_height="50dp"
+	android:contentDescription="@string/color"
+	android:src="@drawable/color" />
+    <ImageButton
+	android:id="@+id/shape_btn"
+	android:layout_width="50dp"
+	android:layout_height="50dp"
+	android:contentDescription="@string/shape"
+	android:src="@drawable/triangle" />
+    <ImageButton
+	android:id="@+id/fill_btn"
+	android:layout_width="50dp"
+	android:layout_height="50dp"
+	android:contentDescription="@string/fill"
+	android:src="@drawable/fill" />
+    <ImageButton
+	android:id="@+id/undo_btn"
+	android:layout_width="50dp"
+	android:layout_height="50dp"
+	android:contentDescription="@string/undo"
+	android:src="@drawable/undo" />
+    <ImageButton
+	android:id="@+id/redo_btn"
+	android:layout_width="50dp"
+	android:layout_height="50dp"
+	android:contentDescription="@string/redo"
+	android:src="@drawable/redo" />
+    <ImageButton
+	android:id="@+id/erase_btn"
+	android:layout_width="50dp"
+	android:layout_height="50dp"
+	android:contentDescription="@string/erase"
+	android:src="@drawable/erase" />
+    <ImageButton
+	android:id="@+id/rect_erase_btn"
+	android:layout_width="50dp"
+	android:layout_height="50dp"
+	android:contentDescription="@string/recterase"
+	android:src="@drawable/eraser" />
+    <ImageButton
+	android:id="@+id/save_btn"
+	android:layout_width="50dp"
+	android:layout_height="50dp"
+	android:contentDescription="@string/save"
+	android:src="@drawable/save" />
+<!--
     <ImageButton
 	android:id="@+id/new_btn"
 	android:layout_width="wrap_content"
@@ -23,7 +91,6 @@
 	android:layout_height="fill_parent"
 	android:contentDescription="@string/open"
 	android:src="@drawable/open" />
-
     <ImageButton
 	android:id="@+id/draw_btn"
 	android:layout_width="wrap_content"
@@ -48,7 +115,6 @@
 	android:layout_height="fill_parent"
 	android:contentDescription="@string/fill"
 	android:src="@drawable/fill" />
-
     <ImageButton
 	android:id="@+id/undo_btn"
 	android:layout_width="wrap_content"
@@ -79,6 +145,7 @@
 	android:layout_height="fill_parent"
 	android:contentDescription="@string/save"
 	android:src="@drawable/save" />
+-->
   </LinearLayout>
 
   <dev.drawingfun.DrawingView
