@@ -129,7 +129,7 @@
 
 * Checkin for 12/01/2014
 ** Buttons I have worked on
-  - ImageView to Bitmap:
+  - ImageView to Bitmap
   - start newBtn
   - Undo/Redo
 ** Functionalities and References
@@ -145,7 +145,7 @@
   - http://stackoverflow.com/questions/18028666/senduseractionevent-is-null
   - startActivity(new Intent(Settings.ACTION_ADD_ACCOUNT));
   - I uninstalled the app and restart, the error was still there
-  - I was so focused on the mView thing that I completely lost track of the true reason. Once I asked and the instuctor helped explain that invalidate() simply calls onDraw() function, I could immediately realize that I forgot to clean my undo/redo arraylist paths and undonePaths! It was the invalidate() function blocked me from relaxing from mView == null, and it DID block me for about one hour this afternoon. Realizing that I hated me had ever been wasting my life so stupid! And I do want to format good habit that never apply codes which I don't understands~ And right now I am following the good habit reading Qt creator documents systematically before googling the correct answer only when I try to solve my technical difficulties, which is good. 
+  - I was so focused on the mView thing that I completely lost track of the true reason. Once I asked and the instuctor helped explain that invalidate() simply calls onDraw() function, I could immediately realize that I forgot to clean my undo/redo arraylist paths and undonePaths! It was the invalidate() function blocked me from relaxing from mView == null, and it DID block me for about one hour this afternoon. Realizing that I hated me had ever been wasting my life so stupid! And right now I am on my way following the good habit reading Qt creator documents systematically before googling the correct answer only when I try to solve my technical difficulties, which is good. 
 *** Undo/Redo
 - If I really don't want to separate/pack my ListView items into objects, will it be possible for me to use command pattern instead, and how difficult could command pattern to be comparatively spearking?
 - References:
@@ -160,7 +160,7 @@
   - http://www.2cto.com/kf/201406/309574.html
   - http://blog.csdn.net/rhljiayou/article/details/7212620
 - Answers: 
-  - We didn't really talk about command patterns at all this afternoon, but rether to solve both the other classmate's and my technical difficulties, and also discussions about my interested parts including multiple layers Potentials when using Bitmap and removing any layers afterwards, and autosave nsapshots if we save bitmap every 20 minutes, and Potential values we could apply with those save displays in paths & undonePaths during each 20 minoutes interval. I began to realize that I COULD have my own creative ideas whenever I began to understand things, like I spent hours from 10:30am today just to understand Bitmap~
+  - We didn't really talk about command patterns at all this afternoon, but rether to solve both the other classmate's and my technical difficulties, and also discussions about my interested parts including multiple layers Potentials when using Bitmap and removing any layers afterwards, and autosave nsapshots if we save bitmap every 20 minutes, and Potential values we could apply with those save displays in paths & undonePaths during each 20 minoutes interval. I began to realize that I COULD have my own creative ideas whenever I began to understand things, like I spent hours today just to understand Bitmap~
 ** Snapshot
 [[./Screenshot_2014-12-01-15-32-21.png]]
 ** Todo
