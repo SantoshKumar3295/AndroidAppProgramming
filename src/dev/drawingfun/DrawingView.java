@@ -53,7 +53,8 @@ public class DrawingView extends View {
     public void clear() {
         isClear = true;
         new2Bitmap = originalBitmap;
-        //new2Bitmap = bridgeBitmap.copy(Bitmap.Config.ARGB_8888, true);    // original 
+        paths = new ArrayList<myPath>();
+        undonePaths = new ArrayList<myPath>();
         invalidate();
     }
     public Bitmap HandWriting(Bitmap oriBitmap) {    
@@ -87,7 +88,6 @@ public class DrawingView extends View {
         lastBrushSize = brushSize;
         resPath = new myPath();    // mine
         resPath.mcolor = paintColor; // to solve the imitial not showing problem
-        //resPath.myPathWrap(drawPath, drawPaint, paintColor, brushSize, false);  // this one doesn't work
         drawPaint.setColor(paintColor);
         drawPaint.setAntiAlias(true);
         drawPaint.setDither(true);  // for shapes
@@ -99,7 +99,6 @@ public class DrawingView extends View {
 
         drawCanvas = new Canvas();
         //paths.add(drawPath); // commented to avoid the very first not working undo
-        //brightBitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.ic_launcher);
         brightBitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.rose);
         //brightBitmap = Bitmap.createScaledBitmap(brightBitmap, 550, 550, false); // don't like this huge stupid one
         //canvasBitmap = Bitmap.createBitmap(originalBitmap); // it is immutable bitmap, needs a mutable one

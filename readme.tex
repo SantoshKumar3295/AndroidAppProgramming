@@ -1,4 +1,4 @@
-% Created 2014-12-01 Mon 15:34
+% Created 2014-12-01 Mon 17:50
 \documentclass[9pt,b5paper]{article}
 \usepackage{graphicx}
 \usepackage{xcolor}
@@ -240,29 +240,26 @@ Potential interests: may implement depends on how I spend thanksgiving \textasci
 \label{sec-5-2-1}
 \begin{itemize}
 \item Worked on Bitmap so that I can load a picture as my drawView background;
-\item Could try to add user options to different background pictures later on;
+\item This could be considered to be a trial, and could try to add user options to different background pictures later on;
 \end{itemize}
 \subsubsection{start newBtn}
 \label{sec-5-2-2}
 \begin{itemize}
-\item Realized becuase I didn't use Bitmap during last checkin, my newBtn lost its functionality, and I fixed it by writing to Bitmap;
-\item The wired drawing path shapes got Corrected as well by writing to Bitmap;
+\item Realized that my newBtn lost its functionality during last checkin because of different mechanisms, and I fixed it after having implemented undo/redo for paths;
+\item The wired drawing path shapes (like the dramatic curves in previous Snapshot) got corrected as well by writing to Bitmap;
 \item References: mutuable immutable bitmaps
 \url{http://stackoverflow.com/questions/13119582/android-immutable-bitmap-crash-error}
 \item But I still failed to start new because the error of the \textbf{ViewRootImpl sendUserActionEvent() mView == null}
-\item I googled the answers that
 \begin{itemize}
 \item \url{http://stackoverflow.com/questions/18028666/senduseractionevent-is-null}
 \item startActivity(new Intent(Settings.ACTION$_{\text{ADD}}$$_{\text{ACCOUNT}}$));
 \item I uninstalled the app and restart, the error was still there
-\item I have \textbf{difficulty} to solve this one;
+\item I was so focused on the mView thing that I completely lost track of the true reason. Once I asked and the instuctor helped explain that invalidate() simply calls onDraw() function, I could immediately realize that I forgot to clean my undo/redo arraylist paths and undonePaths! It was the invalidate() function blocked me from relaxing from mView == null, and it DID block me for about one hour this afternoon. Realizing that I hated me had ever been wasting my life so stupid! And I do want to format good habit that never apply codes which I don't understands\textasciitilde{} And right now I am following the good habit reading Qt creator documents systematically before googling the correct answer only when I try to solve my technical difficulties, which is good.
 \end{itemize}
 \end{itemize}
 \subsubsection{Undo/Redo}
 \label{sec-5-2-3}
 \begin{itemize}
-\item Still got confused why I will have to wrap my ListView items into different objects (because I want undo/redo not only Path, but also \textbf{RectF} etc?)
-\item How do I enum \textbf{Objects} instead of Java data types
 \item If I really don't want to separate/pack my ListView items into objects, will it be possible for me to use command pattern instead, and how difficult could command pattern to be comparatively spearking?
 \item References:
 List: 
@@ -279,6 +276,10 @@ Command Pattern:
 \item \url{http://www.2cto.com/kf/201406/309574.html}
 \item \url{http://blog.csdn.net/rhljiayou/article/details/7212620}
 \end{itemize}
+\item Answers: 
+\begin{itemize}
+\item We didn't really talk about command patterns at all this afternoon, but rether to solve both the other classmate's and my technical difficulties, and also discussions about my interested parts including multiple layers Potentials when using Bitmap and removing any layers afterwards, and autosave nsapshots if we save bitmap every 20 minutes, and Potential values we could apply with those save displays in paths \& undonePaths during each 20 minoutes interval. I began to realize that I COULD have my own creative ideas whenever I began to understand things, like I spent hours from 10:30am today just to understand Bitmap\textasciitilde{}
+\end{itemize}
 \end{itemize}
 \subsection{Snapshot}
 \label{sec-5-3}
@@ -286,7 +287,8 @@ Command Pattern:
 \subsection{Todo}
 \label{sec-5-4}
 \begin{itemize}
-\item listen to the instructor
+\item finish the undone functions and wrap up project and do basic demo on coming Monday;
+\item short about one page summary, could at most to be 2 pages;
 \end{itemize}
 % Emacs 24.3.1 (Org mode 8.2.7c)
 \end{document}

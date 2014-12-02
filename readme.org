@@ -135,21 +135,18 @@
 ** Functionalities and References
 *** ImageView to Bitmap:
 - Worked on Bitmap so that I can load a picture as my drawView background;
-- Could try to add user options to different background pictures later on;
+- This could be considered to be a trial, and could try to add user options to different background pictures later on;
 *** start newBtn
-- Realized becuase I didn't use Bitmap during last checkin, my newBtn lost its functionality, and I fixed it by writing to Bitmap;
-- The wired drawing path shapes got Corrected as well by writing to Bitmap;
+- Realized that my newBtn lost its functionality during last checkin because of different mechanisms, and I fixed it after having implemented undo/redo for paths;
+- The wired drawing path shapes (like the dramatic curves in previous Snapshot) got corrected as well by writing to Bitmap;
 - References: mutuable immutable bitmaps
   http://stackoverflow.com/questions/13119582/android-immutable-bitmap-crash-error
 - But I still failed to start new because the error of the *ViewRootImpl sendUserActionEvent() mView == null*
-- I googled the answers that
   - http://stackoverflow.com/questions/18028666/senduseractionevent-is-null
   - startActivity(new Intent(Settings.ACTION_ADD_ACCOUNT));
   - I uninstalled the app and restart, the error was still there
-  - I have *difficulty* to solve this one;
+  - I was so focused on the mView thing that I completely lost track of the true reason. Once I asked and the instuctor helped explain that invalidate() simply calls onDraw() function, I could immediately realize that I forgot to clean my undo/redo arraylist paths and undonePaths! It was the invalidate() function blocked me from relaxing from mView == null, and it DID block me for about one hour this afternoon. Realizing that I hated me had ever been wasting my life so stupid! And I do want to format good habit that never apply codes which I don't understands~ And right now I am following the good habit reading Qt creator documents systematically before googling the correct answer only when I try to solve my technical difficulties, which is good. 
 *** Undo/Redo
-- Still got confused why I will have to wrap my ListView items into different objects (because I want undo/redo not only Path, but also *RectF* etc?)
-- How do I enum *Objects* instead of Java data types
 - If I really don't want to separate/pack my ListView items into objects, will it be possible for me to use command pattern instead, and how difficult could command pattern to be comparatively spearking?
 - References:
   List: 
@@ -162,7 +159,10 @@
   - http://www.2cto.com/kf/201409/333267.html
   - http://www.2cto.com/kf/201406/309574.html
   - http://blog.csdn.net/rhljiayou/article/details/7212620
+- Answers: 
+  - We didn't really talk about command patterns at all this afternoon, but rether to solve both the other classmate's and my technical difficulties, and also discussions about my interested parts including multiple layers Potentials when using Bitmap and removing any layers afterwards, and autosave nsapshots if we save bitmap every 20 minutes, and Potential values we could apply with those save displays in paths & undonePaths during each 20 minoutes interval. I began to realize that I COULD have my own creative ideas whenever I began to understand things, like I spent hours from 10:30am today just to understand Bitmap~
 ** Snapshot
 [[./Screenshot_2014-12-01-15-32-21.png]]
 ** Todo
-- listen to the instructor
+- finish the undone functions and wrap up project and do basic demo on coming Monday;
+- short about one page summary, could at most to be 2 pages;
