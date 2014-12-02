@@ -142,8 +142,8 @@
 - References: mutuable immutable bitmaps 
 
   http://stackoverflow.com/questions/13119582/android-immutable-bitmap-crash-error
-- But I still failed to start new because the error mView. I uninstalled the app and restart, the error was still there;
-- I was so focused on the mView thing that I completely lost track of the true reason. Once I asked and the instuctor helped explain that invalidate() simply calls onDraw() function, I could immediately realize that I forgot to clean my undo/redo arraylist paths and undonePaths! It was the invalidate() function blocked me from relaxing from mView == null, and it DID block me for about one hour this afternoon. Realizing that I hated me had ever been wasting my life so stupid! And right now I am on my way following the good habit reading Qt creator documents systematically before googling the correct answer only when I try to solve my technical difficulties, which is good. 
+- But I still failed to start new because some minor error about implementation. I uninstalled the app and restart, the error was still there;
+- I was so focused on the mView thing that I completely lost track of the true reason. Once I asked and the instuctor helped explain that invalidate() simply calls onDraw() function, I could immediately realize that I forgot to clean my undo/redo arraylist paths and undonePaths! It was the invalidate() function blocked me from relaxing from the mview, and it DID block me for about one hour this afternoon. Realizing that I hated me had ever been wasting my life so stupid! And right now I am on my way following the good habit reading Qt creator documents systematically before googling the correct answer only when I try to solve my technical difficulties, which is good. 
 *** Undo/Redo
 - If I really don't want to separate/pack my ListView items into objects, will it be possible for me to use command pattern instead, and how difficult could command pattern to be comparatively spearking?
 - References:
