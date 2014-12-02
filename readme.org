@@ -143,7 +143,9 @@
 
   http://stackoverflow.com/questions/13119582/android-immutable-bitmap-crash-error
 - But I still failed to start new because some minor error about implementation. I uninstalled the app and restart, the error was still there;
-- I was so focused on the mView thing that I completely lost track of the true reason. Once I asked and the instuctor helped explain that invalidate() simply calls onDraw() function, I could immediately realize that I forgot to clean my undo/redo arraylist paths and undonePaths! It was the invalidate() function blocked me from relaxing from the mview, and it DID block me for about one hour this afternoon. Realizing that I hated me had ever been wasting my life so stupid! And right now I am on my way following the good habit reading Qt creator documents systematically before googling the correct answer only when I try to solve my technical difficulties, which is good. 
+- I was so focused on the mview thing that I completely lost focus on the true reason. Once I asked and the instuctor helped explain that invalidate() simply calls onDraw() function, I could immediately realize that I forgot to clean my undo/redo arraylist paths and undonePaths! 
+- It was the invalidate() function confused and prevented me from relaxing on the mview, and I was stubborn there for about one hour this afternoon. Realizing that I felt so sorry for myself for the one hour being so stupid! And right now I am on my way following the good habit reading Qt creator documents systematically before googling the correct answer only when I try to solve my technical difficulties, which is good. 
+- While it still worths a minutes to rewind and rethink about what happened during that one hour, how I trusted myself so much and suspected on low probability corner cases situations, rather then double check and confirm that all the steps/processes I had made were correct and reliable. I wished I spend the hour with a scientific attitude the latter.
 *** Undo/Redo
 - If I really don't want to separate/pack my ListView items into objects, will it be possible for me to use command pattern instead, and how difficult could command pattern to be comparatively spearking?
 - References:
@@ -158,7 +160,8 @@
   - http://www.2cto.com/kf/201406/309574.html
   - http://blog.csdn.net/rhljiayou/article/details/7212620
 - Answers: 
-  - We didn't really talk about command patterns at all this afternoon, but rether to solve both the other classmate's and my technical difficulties, and also discussions about my interested parts including multiple layers Potentials when using Bitmap and removing any layers afterwards, and autosave nsapshots if we save bitmap every 20 minutes, and Potential values we could apply with those save displays in paths & undonePaths during each 20 minoutes interval. I began to realize that I COULD have my own creative ideas whenever I began to understand things, like I spent hours today just to understand Bitmap~
+  - We didn't really talk about command patterns at all this afternoon, but rether to solve both the other classmate's and my technical difficulties, and also discussions about the questions we raised, for example, my interested ones including multiple layers Potentials when using Bitmap and removing any layers afterwards, and autosave nsapshots if we save bitmap every 20 minutes, and Potential values we could apply with those save displays in paths & undonePaths during each 20 minoutes interval. 
+  - I began to realize that I COULD have my own little turning/naive ideas when I began to understand things, like I spent hours today just to understand Bitmap~
 ** Snapshot
 [[./Screenshot_2014-12-01-15-32-21.png]]
 ** Todo
