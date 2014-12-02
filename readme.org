@@ -133,7 +133,7 @@
   - start newBtn
   - Undo/Redo
 ** Functionalities and References
-*** ImageView to Bitmap:
+*** ImageView to Bitmap
 - Worked on Bitmap so that I can load a picture as my drawView background;
 - This could be considered to be a trial, and could try to add user options to different background pictures later on;
 *** start newBtn
