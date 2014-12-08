@@ -1,0 +1,48 @@
+#+latex_class: cn-article
+#+latex_header: \lstset{language=c++,numbers=left,numberstyle=\tiny,basicstyle=\ttfamily\small,tabsize=4,frame=none,escapeinside=``,extendedchars=false,keywordstyle=\color{blue!70},commentstyle=\color{red!55!green!55!blue!55!},rulesepcolor=\color{red!20!green!20!blue!20!}}
+#+title: Android App Programming Directed Study ~ DrawingFun
+#+author: Jenny Huang
+
+* Buttons Implemented
+- New
+- Open
+- Draw
+- Color
+- Shape
+- Fill
+- Undo
+- Redo
+- Erase
+- EraseRect
+- Save
+
+* Data Structures Used
+- ArrayList
+- LinkedList
+
+* Java OOD
+- Inheritance
+  - SuperActivity, MainActivity
+- Interface & Implementation
+  - for myPath, myLine, myRect, mySqar, myCirc, myTria classes which implement DrawElement interface;
+
+* Android Libraries Used
+- ListView for shapes
+- Dialog boxes for all the popups
+- Fragment for color selection
+- Thread for FloodFill implementation
+- OnTouchListener, onClickListener for implementing and conducting all the choices
+
+* Course Goal and General Review
+- Taking this course, I wanted to help myself stay on schedule and learn some cutting-edge knowledge as a starting point. 
+- I never had any "new" knowledge like "Android" learned before, this is the first time, and I enjoy it;
+- I enjoyed two modules the most: the color popup dialog and undo/redo functionalities. And in the middle, ListView helped a little bit as well;
+  - The color picker was not my original work, but for me at that time, it was very complicated and it forced me to understand all the Android framework for an App to function, the manifest, layout, value etc;
+  - To implement a fully functional ListView together with the rest functionalities, I figured out my own way of creating a bridge SuperActivity class, which in term of Java-programming, created a start point of confidence that I can implement my ideas (any idears) in Java as far as I *Think* it through, clear. It is always the ideas that matter, instead of any implementation. 
+  - For undo/redo interface/implementation, I had thought to skip around by implementing Command Patterns, but now I am glad that Dr. Jeffery insisted us to apply interface/implementation. And I had been frustrated yet more than happy take my own effort to try, step by step, implement and see eventually it is working~! And during this process, I felt I began to be exposed to Java OOD, Android canvas, bitmap, drawing primitives, and I understood the theory behind them now, even only the parts that I implemented. 
+
+* Course Benefits
+- The latter half semester of implementing DrawFun Paint project helped me realize that I can perform great in concentrated topics, which helps me focus. 
+- It has been a challanging and interesting learning experience during this Android App Programming, and it successfully reached the target which I expected from this course. I learned the basic necessary knowledge to build my Android App and Java Programming background, and I practised and cultivated the necessary and usefull skills to think logically, solve problems and debug my codes. 
+- The course built knowledge, practised skills, as well as built confidence in programming and problem-solving, and help cultivated my *I CAN DO* attitude towards projects.
+- After taking this course, I have a sufficient starting point to self-learn and practise Android App Programming. And now I am ready to prefer Java over c++ as my primary and first choice programming language, and I will try to conduct more practise on Java programming so I can be proficient on it in not far future. 

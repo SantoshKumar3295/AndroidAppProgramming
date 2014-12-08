@@ -76,8 +76,9 @@ containing a value of this type.
         public static final int rose=0x7f020014;
         public static final int save=0x7f020015;
         public static final int small=0x7f020016;
-        public static final int triangle=0x7f020017;
-        public static final int undo=0x7f020018;
+        public static final int ssaved=0x7f020017;
+        public static final int triangle=0x7f020018;
+        public static final int undo=0x7f020019;
     }
     public static final class id {
         public static final int action_settings=0x7f0a0022;

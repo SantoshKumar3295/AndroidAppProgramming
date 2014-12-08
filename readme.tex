@@ -1,4 +1,4 @@
-% Created 2014-12-01 Mon 21:01
+% Created 2014-12-08 Mon 15:23
 \documentclass[9pt,b5paper]{article}
 \usepackage{graphicx}
 \usepackage{xcolor}
@@ -277,7 +277,7 @@ Command Pattern:
 \item Answers: 
 \begin{itemize}
 \item We didn't really talk about command patterns at all this afternoon, but rether to solve both the other classmate's and my technical difficulties, and also discussions about the questions we raised, for example, my interested ones including multiple layers Potentials when using Bitmap and removing any layers afterwards, and autosave nsapshots if we save bitmap every 20 minutes, and Potential values we could apply with those save displays in paths \& undonePaths during each 20 minoutes interval.
-\item I began to realize that I COULD have my own little turning/naive ideas when I began to understand things, like I spent hours today just to understand Bitmap\textasciitilde{}
+\item I began to realize that I COULD have my own little brain-turning/intuitive ideas when I began to understand things, like I spent hours today just to understand Bitmap\textasciitilde{}
 \end{itemize}
 \end{itemize}
 \subsection{Snapshot}
@@ -288,6 +288,92 @@ Command Pattern:
 \begin{itemize}
 \item finish the undone functions and wrap up project and do basic demo on coming Monday;
 \item short about one page summary, could at most to be 2 pages;
+\end{itemize}
+
+\section{Checkin for 12/08/2014}
+\label{sec-6}
+\subsection{Buttons I have worked on}
+\label{sec-6-1}
+\begin{itemize}
+\item Undo/Redo
+\item Erase Button
+\item FloodFill
+\end{itemize}
+\subsection{Functionalities and References}
+\label{sec-6-2}
+\subsubsection{Undo/Redo}
+\label{sec-6-2-1}
+\begin{itemize}
+\item \textbf{Cleaned} my contamination or origial bitmap in DrawView \textbf{clear()} method by replacing "new2Bitmap = originalBitmap; " with "new2Bitmap = bridgeBitmap.copy(Bitmap.Config.ARGB$_{\text{8888}}$, true);"
+\item I used bitmap only for the propose of adding the Yellow Rose which I liked it too much and wanted to keep it as a corner backgroung; But for the rest of drawings, they are all drawn on canvas instead of bitmap;
+\item I could draw all the contents in bitmap, but my \textbf{Straight Line} looked really wired on bitmap when I draw in progress, but otherwise I don't have any clear idea how to remember the start and end points and draw a straight line during onDraw. I need some idea here, if I continued to use bitmap instead of canvas;
+\end{itemize}
+\subsubsection{Erase button}
+\label{sec-6-2-2}
+\begin{itemize}
+\item Becuase I liked the Yellow Rose too much, I had to conpensate and rewrite the erase function to draw shapes using background color, because the old method doesn't work any more when I used bitmap; The function itself was not difficult at all though.
+\end{itemize}
+\subsubsection{FloodFill}
+\label{sec-6-2-3}
+\begin{itemize}
+\item Implemented on Bitmap instead of canvas
+\item I used bitmap only for the propose of adding the background image and do the FloodFill on the background image. But for the rest of drawings, they are all drawn on canvas instead of bitmap;
+\item Applied the following method, but it was way too slow, and look urgyly
+\item \url{http://stackoverflow.com/questions/12669740/android-using-flood-fill-algorithm-getting-out-of-memory-exception}
+\item \url{http://stackoverflow.com/questions/8070401/android-flood-fill-algorithm}
+\item \url{http://www.codeproject.com/Articles/364413/Queue-Linear-Flood-Fill-A-Fast-Flood-Fill-Algorith}
+\item \url{http://stackoverflow.com/questions/8723590/fill-the-complete-canvas-but-keep-the-bound-fill-area-as-it-is-like-circle-rect/12777805#12777805}
+\item \url{http://blog.csdn.net/jia20003/article/details/8908464}
+\end{itemize}
+\subsubsection{Other Issues}
+\label{sec-6-2-4}
+\begin{itemize}
+\item setBrushSize 
+\begin{itemize}
+\item Issue: the setBrushSize option always changed the drawView color back to initial default color, which is Color.BLUE, and which is not convenient;
+\item In \textbf{MainActivity}, when draw$_{\text{btn}}$ I setBrushSize, I have to do \textbf{drawView.setColor(mColor);}, otherwise, it always set drawView's paintColor to be default Color.BLUE;
+\item But I don't think the above implementation is logical. I don't think click on draw$_{\text{btn}}$ need to do anything about color when I suppose to set the brushSize; But I have difficulties to understand the process and find a better "logical" solution for it.
+\end{itemize}
+\item onSizeChange
+\begin{itemize}
+\item I think I have bug on \textbf{onSizeChange} function, because whenever I changed my device from vertically to horizontally, all the contents on my canvas just went away.
+\item I can think the reason is because I didn't really draw anything on the bitmap yet, and that's the reason whenever I changed from vertical to horizontal, I have only my fresh loaded background bitmap;
+\item But, if I want to draw on bitmap, I will have to reimplement my undo/redo differently, the current ArrayList method won't work any more.
+\item If I reimplement on bitmap, what will be the good idea to implement it?
+\item I would be happy if the instructor helps Introduce a little bit more 0about bitmap, undo/redo on it, and its utilities.
+\end{itemize}
+\end{itemize}
+\subsubsection{report}
+\label{sec-6-2-5}
+Course report is in \textbf{report.org} file, and main sections are also copied into the followed section for the reader's convenience. 
+
+\subsection{Snapshot}
+\label{sec-6-3}
+\includegraphics[width=.9\linewidth]{./Screenshot_2014-12-08-11-42-04.png}
+\subsection{Todo}
+\label{sec-6-4}
+
+\section{Course Review}
+\label{sec-7}
+\subsection{Course Goal and General Review}
+\label{sec-7-1}
+\begin{itemize}
+\item Taking this course, I wanted to help myself stay on schedule and learn some cutting-edge knowledge as a starting point.
+\item I never had any "new" knowledge like "Android" learned before, this is the first time, and I enjoy it;
+\item I enjoyed two modules the most: the color popup dialog and undo/redo functionalities. And in the middle, ListView helped a little bit as well;
+\begin{itemize}
+\item The color picker was not my original work, but for me at that time, it was very complicated and it forced me to understand all the Android framework for an App to function, the manifest, layout, value etc;
+\item To implement a fully functional ListView together with the rest functionalities, I figured out my own way of creating a bridge SuperActivity class, which in term of Java-programming, created a start point of confidence that I can implement my ideas (any idears) in Java as far as I \textbf{Think} it through, clear. \textbf{It is always the ideas that matter, instead of any implementation.}
+\item For undo/redo interface/implementation, I had thought to skip around by implementing Command Patterns, but now I am glad that Dr. Jeffery insisted us to apply interface/implementation. And I had been frustrated yet more than happy take my own effort to try, step by step, implement and see eventually it is working\textasciitilde{}! And during this process, I felt I began to be exposed to Java OOD, Android canvas, bitmap, drawing primitives, and I understood the theory behind them now, even only the parts that I implemented.
+\end{itemize}
+\end{itemize}
+\subsection{Course Benefits}
+\label{sec-7-2}
+\begin{itemize}
+\item The latter half semester of implementing DrawFun Paint project helped me realize that I can perform great in concentrated topics, which helps me focus.
+\item It has been a challanging and interesting learning experience during this Android App Programming, and it successfully reached the target which I expected from this course. I learned the basic necessary knowledge to build my Android App and Java Programming background, and I practised and cultivated the necessary and usefull skills to think logically, solve problems and debug my codes.
+\item The course built knowledge, practised skills, as well as built confidence in programming and problem-solving, and help cultivated my \textbf{I CAN DO} attitude towards projects.
+\item After taking this course, I have a sufficient starting point to self-learn and practise Android App Programming. And now I am ready to prefer Java over c++ as my primary and first choice programming language, and I will try to conduct more practise on Java programming so I can be proficient on it in not far future.
 \end{itemize}
 % Emacs 24.3.1 (Org mode 8.2.7c)
 \end{document}

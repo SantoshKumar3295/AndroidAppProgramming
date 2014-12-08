@@ -34,7 +34,8 @@ import android.widget.TextView;
 // this superclass subclass problem got solved the other way around
 //public class SuperActivity extends FragmentActivity implements OnAmbilWarnaListener, View.OnClickListener {
 public class SuperActivity extends FragmentActivity implements OnAmbilWarnaListener {
-    public ImageButton colorBtn;
+    //public ImageButton colorBtn;  // I may not need this one here
+    
     public static int mColor = 0; // mColor, colorBtn
     @Override
     public void onCancel(AmbilWarnaDialogFragment dialogFragment)  {

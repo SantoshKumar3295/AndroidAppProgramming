@@ -1,0 +1,104 @@
+% Created 2014-12-08 Mon 15:21
+\documentclass[9pt,b5paper]{article}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{xeCJK}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{textcomp}
+\usepackage{geometry}
+\geometry{left=0cm,right=0cm,top=0cm,bottom=0cm}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{latexsym}
+\usepackage{natbib}
+\usepackage{fancyhdr}
+\usepackage[xetex,colorlinks=true,CJKbookmarks=true,linkcolor=blue,urlcolor=blue,menucolor=blue]{hyperref}
+
+
+\lstset{language=c++,numbers=left,numberstyle=\tiny,basicstyle=\ttfamily\small,tabsize=4,frame=none,escapeinside=``,extendedchars=false,keywordstyle=\color{blue!70},commentstyle=\color{red!55!green!55!blue!55!},rulesepcolor=\color{red!20!green!20!blue!20!}}
+\author{Jenny Huang}
+\date{\today}
+\title{Android App Programming Directed Study \textasciitilde{} DrawingFun}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.3.1 (Org mode 8.2.7c)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{Buttons Implemented}
+\label{sec-1}
+\begin{itemize}
+\item New
+\item Open
+\item Draw
+\item Color
+\item Shape
+\item Fill
+\item Undo
+\item Redo
+\item Erase
+\item EraseRect
+\item Save
+\end{itemize}
+
+\section{Data Structures Used}
+\label{sec-2}
+\begin{itemize}
+\item ArrayList
+\item LinkedList
+\end{itemize}
+
+\section{Java OOD}
+\label{sec-3}
+\begin{itemize}
+\item Inheritance
+\begin{itemize}
+\item SuperActivity, MainActivity
+\end{itemize}
+\item Interface \& Implementation
+\begin{itemize}
+\item for myPath, myLine, myRect, mySqar, myCirc, myTria classes which implement DrawElement interface;
+\end{itemize}
+\end{itemize}
+
+\section{Android Libraries Used}
+\label{sec-4}
+\begin{itemize}
+\item ListView for shapes
+\item Dialog boxes for all the popups
+\item Fragment for color selection
+\item Thread for FloodFill implementation
+\item OnTouchListener, onClickListener for implementing and conducting all the choices
+\end{itemize}
+
+\section{Course Goal and General Review}
+\label{sec-5}
+\begin{itemize}
+\item Taking this course, I wanted to help myself stay on schedule and learn some cutting-edge knowledge as a starting point.
+\item I never had any "new" knowledge like "Android" learned before, this is the first time, and I enjoy it;
+\item I enjoyed two modules the most: the color popup dialog and undo/redo functionalities. And in the middle, ListView helped a little bit as well;
+\begin{itemize}
+\item The color picker was not my original work, but for me at that time, it was very complicated and it forced me to understand all the Android framework for an App to function, the manifest, layout, value etc;
+\item To implement a fully functional ListView together with the rest functionalities, I figured out my own way of creating a bridge SuperActivity class, which in term of Java-programming, created a start point of confidence that I can implement my ideas (any idears) in Java as far as I \textbf{Think} it through, clear. It is always the ideas that matter, instead of any implementation.
+\item For undo/redo interface/implementation, I had thought to skip around by implementing Command Patterns, but now I am glad that Dr. Jeffery insisted us to apply interface/implementation. And I had been frustrated yet more than happy take my own effort to try, step by step, implement and see eventually it is working\textasciitilde{}! And during this process, I felt I began to be exposed to Java OOD, Android canvas, bitmap, drawing primitives, and I understood the theory behind them now, even only the parts that I implemented.
+\end{itemize}
+\end{itemize}
+
+\section{Course Benefits}
+\label{sec-6}
+\begin{itemize}
+\item The latter half semester of implementing DrawFun Paint project helped me realize that I can perform great in concentrated topics, which helps me focus.
+\item It has been a challanging and interesting learning experience during this Android App Programming, and it successfully reached the target which I expected from this course. I learned the basic necessary knowledge to build my Android App and Java Programming background, and I practised and cultivated the necessary and usefull skills to think logically, solve problems and debug my codes.
+\item The course built knowledge, practised skills, as well as built confidence in programming and problem-solving, and help cultivated my \textbf{I CAN DO} attitude towards projects.
+\item After taking this course, I have a sufficient starting point to self-learn and practise Android App Programming. And now I am ready to prefer Java over c++ as my primary and first choice programming language, and I will try to conduct more practise on Java programming so I can be proficient on it in not far future.
+\end{itemize}
+% Emacs 24.3.1 (Org mode 8.2.7c)
+\end{document}

@@ -51,13 +51,13 @@ import android.os.AsyncTask;
 public class MainActivity extends SuperActivity implements View.OnClickListener {
     private DrawingView drawView;
     private ImageButton currPaint, drawBtn, eraseBtn, newBtn, openBtn, saveBtn, colorBtn, undoBtn, redoBtn, shapeBtn;
+    private ImageButton fillBtn, recteraseBtn;
     private float smallBrush, mediumBrush, largeBrush;
     private static int mColor = 0; // mColor, colorBtn
-
     private static String mShape;
     public static String FILEPATH = "filePath";
     public static String FILENAME = "fileName";
-    private int selectedItem = 7;  // reset this value to something else
+    private int selectedItem = 3;  // smoothline
     ImageView imgView;
     Bitmap bitmap;
     ProgressDialog pDialog;
@@ -82,6 +82,16 @@ public class MainActivity extends SuperActivity implements View.OnClickListener 
         newBtn.setOnClickListener(this);
         saveBtn = (ImageButton)findViewById(R.id.save_btn);
         saveBtn.setOnClickListener(this);
+
+        recteraseBtn = (ImageButton)findViewById(R.id.fill_btn);
+        recteraseBtn.setOnClickListener(this);
+        fillBtn = (ImageButton)findViewById(R.id.fill_btn);
+        fillBtn.setOnClickListener(new OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    drawView.setmCurrentShape(6);
+                }
+            });
 
         openBtn = (ImageButton)findViewById(R.id.open_btn);  // not fully what I want
         imgView = (ImageView)findViewById(R.id.img_view);  // img_view
@@ -166,7 +176,7 @@ public class MainActivity extends SuperActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-       if (view.getId() == R.id.draw_btn) {
+        if (view.getId() == R.id.draw_btn) {
             final Dialog brushDialog = new Dialog(this);
             brushDialog.setTitle("Brush size:");
             brushDialog.setContentView(R.layout.brush_chooser);
@@ -202,6 +212,7 @@ public class MainActivity extends SuperActivity implements View.OnClickListener 
                     }
                 });
             drawView.setErase(false);
+            drawView.setColor(mColor);
             brushDialog.show();
         } else if (view.getId() == R.id.erase_btn) {
             // respond to clicks -- for erase button
@@ -319,8 +330,6 @@ public class MainActivity extends SuperActivity implements View.OnClickListener 
 
         drawView.setErase(false);
         drawView.setBrushSize(drawView.getLastBrushSize());
-
-        // uer chosen color
         if (color != mColor) {
             // update color
             //MainActivity.this.mColor = color;
@@ -409,53 +418,13 @@ public class MainActivity extends SuperActivity implements View.OnClickListener 
         values.add("Rectangle");
         values.add("Square");
         values.add("Circle");
-        values.add("Line");
+        values.add("Straight Line");
         values.add("Smooth Line");
         values.add("Triangle");
+        //values.add("FloodFill");
         return values;
     }
 
-    /*
-        @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onCancel(AmbilWarnaDialogFragment dialogFragment)  {
-        Log.d("TAG", "onCancel()");
-    }
-
-    @Override
-    public void onOk(AmbilWarnaDialogFragment dialogFragment, int color)  {
-        Log.d("TAG", "onOk(). Color: " + color);
-
-        //drawView.setErase(false);
-        //drawView.setBrushSize(drawView.getLastBrushSize());
-
-        // uer chosen color
-        if (color != mColor) {
-            // update color
-            //MainActivity.this.mColor = color;
-            SuperActivity.this.mColor = color;
-            //drawView.setColor(mColor);
-        }
-    }
-    */
     // show Color Picker dialog fragment. If color wasn't set previously, set BLUE by default
     public void showColorPicker() {
         int thisColor = super.mColor == 0 ? Color.BLUE : mColor;
@@ -467,27 +436,3 @@ public class MainActivity extends SuperActivity implements View.OnClickListener 
         fragment.show(ft, "color_picker_dialog");
     }
 }
-
-                    /*
-                    // completely working properly code
-                    ArrayList<String> listImage = new ArrayList<String>();
-                    // scan outernal image
-                    String str[] = {MediaStore.Images.Media._ID,
-                                    MediaStore.Images.Media.DISPLAY_NAME,
-                                    MediaStore.Images.Media.DATA};
-                    Cursor cursor = MainActivity.this.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, str, null, null, null);
-                    while (cursor.moveToNext()) {
-                        System.out.println(cursor.getString(0));  // pic ID
-                        System.out.println(cursor.getString(1));  // pic file name
-                        System.out.println(cursor.getString(2));  // pic path
-                        listImage.add(cursor.getString(2));
-                        new LoadImage().execute(cursor.getString(2));
-                    }
-                    */
-
-        /*  // this method is bad becuase memory comsumtive too much freeze UI
-        URL url = new URL("http://image10.bizrate-images.com/resize?sq=60&uid=2216744464");
-        Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-        imageView.setImageBitmap(bmp);                        
-        */
-
