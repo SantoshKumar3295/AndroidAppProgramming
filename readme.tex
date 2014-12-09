@@ -1,4 +1,4 @@
-% Created 2014-12-08 Mon 15:23
+% Created 2014-12-08 Mon 20:14
 \documentclass[9pt,b5paper]{article}
 \usepackage{graphicx}
 \usepackage{xcolor}
@@ -307,6 +307,7 @@ Command Pattern:
 \item \textbf{Cleaned} my contamination or origial bitmap in DrawView \textbf{clear()} method by replacing "new2Bitmap = originalBitmap; " with "new2Bitmap = bridgeBitmap.copy(Bitmap.Config.ARGB$_{\text{8888}}$, true);"
 \item I used bitmap only for the propose of adding the Yellow Rose which I liked it too much and wanted to keep it as a corner backgroung; But for the rest of drawings, they are all drawn on canvas instead of bitmap;
 \item I could draw all the contents in bitmap, but my \textbf{Straight Line} looked really wired on bitmap when I draw in progress, but otherwise I don't have any clear idea how to remember the start and end points and draw a straight line during onDraw. I need some idea here, if I continued to use bitmap instead of canvas;
+\item Fixed minor issue for smooth line undo when I tried the function onSizeChange, which was originally working before;
 \end{itemize}
 \subsubsection{Erase button}
 \label{sec-6-2-2}
@@ -345,7 +346,10 @@ Command Pattern:
 \end{itemize}
 \subsubsection{report}
 \label{sec-6-2-5}
-Course report is in \textbf{report.org} file, and main sections are also copied into the followed section for the reader's convenience. 
+\begin{itemize}
+\item Course report is in \textbf{report.org} file, and main sections are also copied into the followed section for the reader's convenience.
+\item The demo was reviewed today and the course is done. I did pretty good job for this DrawingFun project and the course, but I need to prioritize my tasks, and I won't be able to update this repository for a while. Thanks for looking.
+\end{itemize}
 
 \subsection{Snapshot}
 \label{sec-6-3}
@@ -370,7 +374,7 @@ Course report is in \textbf{report.org} file, and main sections are also copied 
 \subsection{Course Benefits}
 \label{sec-7-2}
 \begin{itemize}
-\item The latter half semester of implementing DrawFun Paint project helped me realize that I can perform great in concentrated topics, which helps me focus.
+\item The latter half semester of implementing DrawingFun Paint project helped me realize that I can perform great in concentrated topics, which helps me focus.
 \item It has been a challanging and interesting learning experience during this Android App Programming, and it successfully reached the target which I expected from this course. I learned the basic necessary knowledge to build my Android App and Java Programming background, and I practised and cultivated the necessary and usefull skills to think logically, solve problems and debug my codes.
 \item The course built knowledge, practised skills, as well as built confidence in programming and problem-solving, and help cultivated my \textbf{I CAN DO} attitude towards projects.
 \item After taking this course, I have a sufficient starting point to self-learn and practise Android App Programming. And now I am ready to prefer Java over c++ as my primary and first choice programming language, and I will try to conduct more practise on Java programming so I can be proficient on it in not far future.

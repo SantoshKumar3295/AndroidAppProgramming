@@ -83,26 +83,10 @@ public class DrawingView extends View {
         resTria = new myTria();
         pd = new ProgressDialog(context);
         brushSize = getResources().getInteger(R.integer.medium_size);
-        /*
-        resPath.mColor = paintColor;
-        resLine.mColor = paintColor;
-        resRect.mColor = paintColor;
-        resSqar.mColor = paintColor;
-        resCirc.mColor = paintColor;
-        resTria.mColor = paintColor;
-        */
         drawPaint.setColor(paintColor);
         drawPaint.setAntiAlias(true);
         drawPaint.setDither(true);  
         drawPaint.setStrokeWidth(brushSize);
-        /*
-        resPath.mSize = brushSize;
-        resLine.mSize = brushSize;
-        resRect.mSize = brushSize;
-        resSqar.mSize = brushSize;
-        resCirc.mSize = brushSize;
-        resTria.mSize = brushSize;
-        */
         lastBrushSize = brushSize;
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeJoin(Paint.Join.ROUND);
@@ -125,7 +109,7 @@ public class DrawingView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh); 
         canvasBitmap = HandWriting(canvasBitmap);
-        drawCanvas = new Canvas(canvasBitmap);                              
+        //drawCanvas = new Canvas(canvasBitmap);                              
         
         //canvasBitmap = canvasBitmap.copy(Bitmap.Config.ARGB_8888, true);  
         //drawCanvas = new Canvas(canvasBitmap);                              //2
@@ -168,7 +152,7 @@ public class DrawingView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);        //added here today
-        canvas.drawBitmap(HandWriting(canvasBitmap), 0, 0, drawPaint);  // Actually I didn't do anything on Bitmap yet, except Yello Rose
+        canvas.drawBitmap(HandWriting(canvasBitmap), 0, 0, drawPaint);  // Actually I didn't do anything on Bitmap yet, except Background
 
         for(DrawElement p: paths){
             if (p.getId() == 0) {
@@ -573,7 +557,6 @@ public class DrawingView extends View {
         paths.add(resPath.myPathWrap(drawPath, drawPaint, paintColor, brushSize)); 
         drawPath = new Path();
     }
-
     
     public void setColor(int newColor) {
         invalidate();

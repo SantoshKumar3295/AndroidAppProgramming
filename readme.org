@@ -178,6 +178,7 @@
 - *Cleaned* my contamination or origial bitmap in DrawView *clear()* method by replacing "new2Bitmap = originalBitmap; " with "new2Bitmap = bridgeBitmap.copy(Bitmap.Config.ARGB_8888, true);"
 - I used bitmap only for the propose of adding the Yellow Rose which I liked it too much and wanted to keep it as a corner backgroung; But for the rest of drawings, they are all drawn on canvas instead of bitmap;
 - I could draw all the contents in bitmap, but my *Straight Line* looked really wired on bitmap when I draw in progress, but otherwise I don't have any clear idea how to remember the start and end points and draw a straight line during onDraw. I need some idea here, if I continued to use bitmap instead of canvas;
+- Fixed minor issue for smooth line undo when I tried the function onSizeChange, which was originally working before;
 *** Erase button
 - Becuase I liked the Yellow Rose too much, I had to conpensate and rewrite the erase function to draw shapes using background color, because the old method doesn't work any more when I used bitmap; The function itself was not difficult at all though. 
 *** FloodFill
@@ -201,7 +202,8 @@
   - If I reimplement on bitmap, what will be the good idea to implement it?
   - I would be happy if the instructor helps Introduce a little bit more 0about bitmap, undo/redo on it, and its utilities. 
 *** report
-    Course report is in *report.org* file, and main sections are also copied into the followed section for the reader's convenience. 
+- Course report is in *report.org* file, and main sections are also copied into the followed section for the reader's convenience.
+- The demo was reviewed today and the course is done. I did pretty good job for this DrawingFun project and the course, but I need to prioritize my tasks, and I won't be able to update this repository for a while. Thanks for looking.  
 
 ** Snapshot
   [[./Screenshot_2014-12-08-11-42-04.png]]
@@ -216,7 +218,7 @@
   - To implement a fully functional ListView together with the rest functionalities, I figured out my own way of creating a bridge SuperActivity class, which in term of Java-programming, created a start point of confidence that I can implement my ideas (any idears) in Java as far as I *Think* it through, clear. *It is always the ideas that matter, instead of any implementation.* 
   - For undo/redo interface/implementation, I had thought to skip around by implementing Command Patterns, but now I am glad that Dr. Jeffery insisted us to apply interface/implementation. And I had been frustrated yet more than happy take my own effort to try, step by step, implement and see eventually it is working~! And during this process, I felt I began to be exposed to Java OOD, Android canvas, bitmap, drawing primitives, and I understood the theory behind them now, even only the parts that I implemented. 
 ** Course Benefits
-- The latter half semester of implementing DrawFun Paint project helped me realize that I can perform great in concentrated topics, which helps me focus. 
+- The latter half semester of implementing DrawingFun Paint project helped me realize that I can perform great in concentrated topics, which helps me focus. 
 - It has been a challanging and interesting learning experience during this Android App Programming, and it successfully reached the target which I expected from this course. I learned the basic necessary knowledge to build my Android App and Java Programming background, and I practised and cultivated the necessary and usefull skills to think logically, solve problems and debug my codes. 
 - The course built knowledge, practised skills, as well as built confidence in programming and problem-solving, and help cultivated my *I CAN DO* attitude towards projects.
 - After taking this course, I have a sufficient starting point to self-learn and practise Android App Programming. And now I am ready to prefer Java over c++ as my primary and first choice programming language, and I will try to conduct more practise on Java programming so I can be proficient on it in not far future. 
