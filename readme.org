@@ -204,10 +204,8 @@
 *** report
 - Course report is in *report.org* file, and main sections are also copied into the followed section for the reader's convenience.
 - The demo was reviewed today and the course is done. I did pretty good job for this DrawingFun project and the course, but I need to prioritize my tasks, and I won't be able to update this repository for a while. Thanks for looking.  
-
 ** Snapshot
   [[./Screenshot_2014-12-08-11-42-04.png]]
-** Todo
 
 * Course Review
 ** Course Goal and General Review
