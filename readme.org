@@ -229,16 +229,22 @@
 - The final report deadline for me is Friday, coming week. Of course I would be able to finish on time. I will update this repository when I finish my updated report as well.
 
 * Personal Conclusion
-- I had minor difficulties setting up my Android environment at the beginning of the semester, like my window's SDK manager never worked; And at the beginning of the semester my Linux Mint 17 Eclipse kept crashes... It was from time to time, I searched and googled, and get my Linux version stable; And I did have some help from the other classmate as well;
-- The first help semester kind of, the course contents were slightly distributed, and I felt I didn't really know what to focus, and I don't like that half of semester;
-- The rest about half semester I worked on this DrawingFun project, and I am clearly confident that I did pretty good job, compared with the other classmate. 
+- I had minor difficulties setting up my Android environment at the beginning of the semester, like my window's SDK manager never worked; And at the beginning of the semester my Linux Mint 17 Eclipse kept crashing... It was from time to time, I searched and googled, and get my Linux version stable; And I did have some help from the other classmate as well;
+- The first half semester kind of, the course contents were slightly distributed, and I felt I didn't really know what to focus, and I don't like that half of semester;
+- The rest about half semester I worked on this DrawingFun project, and I am confident that I did pretty good job, comparatively spearking, compared with the other classmate. 
   - I applied Color-Picker functionality, while he applied mine; 
   - I applied ListView for drawing primitives, while he applied the same original setting-brush-size methods - a popup dialog with button choices included; 
   - I initiated to include the undo/redo button in our app ideas orginally came from Picasso app motivation; We independently implemented undo/redo functionalities while mine is fully functioning and his some primitives cannot conduct undo/redo yet;
-  - I found and debugged my setBrushSize() function to remember last applied color, the other classmate didn't seem to be able to notics this, or he hadn't have time to look into it yet;
+  - I found and debugged my setBrushSize() function to remember last applied color, the other classmate didn't seem to be able to notice this, or he hadn't have time to look into it yet;
   - I spent some time on the onSizeChange() function tried to make my program work then I hold it horizontally, while the other student directly set his App to be applied vertically FIXED so that he didn't have any onSizeChange() issues at all;
   - I used bitmap and reimplemented my erase function, while he kept my default first version method. And his undo/redo/erase design supports only erasing smoothline (one of my six primitives, he had four or five), while mine supports earsing all my six primitive styles, and I liked this implementation;
-  - I googled and applied FloodFill function in my App on bitmap level, and I tried two implementations, one ASyncTask idea (which was slow and sometimes my App main UI freezes), and one Thread implementation (and the UI never freeze when I floodfills my bitmap); while the other classmate floodfill the whole bitmap background with one color while loosing all other App functionalities, and I guess he didn't really understand the difference between canvas and bitmap because otherwise he should have loaded a background bitmap which is adapted for floodfilling somewhere;
+  - I googled and applied FloodFill function in my App on bitmap level, and I tried two implementations, one ASyncTask idea (which was slow and sometimes my App main UI froze), and one Thread implementation (and the UI never freeze when I floodfills my bitmap); while the other classmate floodfilled the whole bitmap background with one color while loosing all other App functionalities, and I guess he didn't really understand the difference between canvas and bitmap because otherwise he should have loaded a background bitmap which is adapted for floodfilling somewhere;
 - I completely understand that the other classmate could have his other priorities, and he is undergrad while I am the graduate level, just like cs480 Senior Design the course instructor didn't require me to do any further design, but it is my first time to be able to handle such big and interesting project, and I want to dive into it and get myself well-practised, and I will insist this idea by implementing at least one of project great (senior design project, or midi Controller project, most probably the latter) so that I learn and understand.
 - As the course instructor has claimed at the beginning of semester too, he was also trying to learn Android for his Unicon graphics implementation later on, we were NOT a great nor efficient team yet, but it forms a great learning experience, at least for me. And later on, I should set higher standards on myself than now, and I will *practice* more as encouraged by the instructor.
 - This became another experience for me that *Self-adaption, self-motivation and passion are very important for projects and career success.*
+
+
+
+
+
+
