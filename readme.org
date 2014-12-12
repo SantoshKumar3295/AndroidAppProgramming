@@ -220,7 +220,7 @@
 - It has been a challanging and interesting learning experience during this Android App Programming, and it successfully reached the target which I expected from this course. I learned the basic necessary knowledge to build my Android App and Java Programming background, and I practised and cultivated the necessary and usefull skills to think logically, solve problems and debug my codes. 
 - The course built knowledge, practised skills, as well as built confidence in programming and problem-solving, and help cultivated my *I CAN DO* attitude towards projects.
 - After taking this course, I have a sufficient starting point to self-learn and practise Android App Programming. And now I am ready to prefer Java over c++ as my primary and first choice programming language, and I will try to conduct more practise on Java programming so I can be proficient on it in not far future. 
-** Report Feedback from Instructor
+** Report Feedback from Instructor - 12/12/2014
 - I got the report feedback from the course instructor today that he doesn't require any coding work any more as was concluded on Monday's demo and review already, but he would still expect a slightly better version of report from me with the marked requirements;
 - A scann copy of my origial report and the course instructor's marks are attached below, and I will make necessary modifications for it so it satisfies his requirements. 
 [[./IMG_0001.jpg]]
