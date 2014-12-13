@@ -227,6 +227,9 @@
 
 [[./IMG_0002.jpg]]
 - The final report deadline for me is Friday, coming week. Of course I would be able to finish on time. I will update this repository when I finish my updated report as well.
+** practice vs practise
+- When I knoced the door of my instructor's office yesterday (12/12/2014, *now I am modifying on 12/13/2014*) at noon, the instructor said he was right on working on my report, and if I could wait several minutes, he would be able to finish. So I waited in his office, and he searched internet on propose that the *practise* in my last section should be writen as *practice*, and that was the reason he wrote *practice* on my second page. 
+- And after he searched the word using google, he emphasized by talking to me that in bratish english, people may spell *practice* as *practise*, but in America, they use to write as *practice*. He wrote the word down on my report without circling the original wrong-spelled word. 
 
 * Personal Conclusion
 - I had minor difficulties setting up my Android environment at the beginning of the semester, like my window's SDK manager never worked; And at the beginning of the semester my Linux Mint 17 Eclipse kept crashing... It was from time to time, I searched and googled, and get my Linux version stable; And I did have some help from the other classmate as well;
@@ -240,7 +243,7 @@
   - I used bitmap and reimplemented my erase function, while he kept my default first version method. And his undo/redo/erase design supports only erasing smoothline (one of my six primitives, he had four or five), while mine supports earsing all my six primitive styles, and I liked this implementation;
   - I googled and applied FloodFill function in my App on bitmap level, and I tried two implementations, one ASyncTask idea (which was slow and sometimes my App main UI froze), and one Thread implementation (and the UI never freeze when I floodfills my bitmap); while the other classmate floodfilled the whole bitmap background with one color while loosing all other App functionalities, and I guess he didn't really understand the difference between canvas and bitmap because otherwise he should have loaded a background bitmap which is adapted for floodfilling somewhere;
 - I completely understand that the other classmate could have his other priorities, and he is undergrad while I am the graduate level, just like cs480 Senior Design the course instructor didn't require me to do any further design, but it is my first time to be able to handle such big and interesting project, and I want to dive into it and get myself well-practised, and I will insist this idea by implementing at least one of project great (senior design project, or midi Controller project, most probably the latter) so that I learn and understand.
-- As the course instructor has claimed at the beginning of semester too, he was also trying to learn Android for his Unicon graphics implementation later on, we were NOT a great nor efficient team yet, but it forms a great learning experience, at least for me. And later on, I should set higher standards on myself than now, and I will *practice* more as encouraged by the instructor.
+- As the course instructor has claimed at the beginning of semester too, he was also trying to learn Android for his Unicon graphics implementation later on, we were NOT a great nor efficient team yet, but it forms a great learning experience, at least for me. And later on, I should set higher standards on myself than now, and I will *practice* more for my own good.
 - This became another experience for me that *Self-adaption, self-motivation and passion are very important for projects and career success.*
 
 
