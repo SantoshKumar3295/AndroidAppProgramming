@@ -3,46 +3,46 @@
 #+title: Android App Programming Directed Study ~ DrawingFun
 #+author: Jenny Huang
 
-* Buttons Implemented
-- New
-- Open
-- Draw
-- Color
-- Shape
-- Fill
-- Undo
-- Redo
-- Erase
-- EraseRect
-- Save
-
-* Data Structures Used
-- ArrayList
-- LinkedList
-
-* Java OOD
-- Inheritance
-  - SuperActivity, MainActivity
-- Interface & Implementation
-  - for myPath, myLine, myRect, mySqar, myCirc, myTria classes which implement DrawElement interface;
-
-* Android Libraries Used
-- ListView for shapes
-- Dialog boxes for all the popups
-- Fragment for color selection
-- Thread for FloodFill implementation
-- OnTouchListener, onClickListener for implementing and conducting all the choices
-
 * Course Goal and General Review
 - Taking this course, I wanted to help myself stay on schedule and learn some cutting-edge knowledge as a starting point. 
 - I never had any "new" knowledge like "Android" learned before, this is the first time, and I enjoy it;
 - I enjoyed two modules the most: the color popup dialog and undo/redo functionalities. And in the middle, ListView helped a little bit as well;
   - The color picker was not my original work, but for me at that time, it was very complicated and it forced me to understand all the Android framework for an App to function, the manifest, layout, value etc;
-  - To implement a fully functional ListView together with the rest functionalities, I figured out my own way of creating a bridge SuperActivity class, which in term of Java-programming, created a start point of confidence that I can implement my ideas (any idears) in Java as far as I *Think* it through, clear. It is always the ideas that matter, instead of any implementation. 
+  - To implement a fully functional ListView together with the rest of the functionalities, I figured out my own way of creating a bridge SuperActivity class, which in terms of Java-programming, created a starting point of confidence that I can implement my ideas (any ideas) in Java as far as I *think* it through, clear. It is always the ideas that matter, instead of any implementation. 
   - For undo/redo interface/implementation, I had thought to skip around by implementing Command Patterns, but now I am glad that Dr. Jeffery insisted us to apply interface/implementation. And I had been frustrated yet more than happy take my own effort to try, step by step, implement and see eventually it is working~! And during this process, I felt I began to be exposed to Java OOD, Android canvas, bitmap, drawing primitives, and I understood the theory behind them now, even only the parts that I implemented. 
+
+* Functionalities and User Interface
+** Functionalities
+- *New, Draw, Save, Erase:* These four functions were originally included in the starting point app already; I just modified "*Erase*" functionalities so that according to my drawing primitives, which will be included below, I can erase in different shapes, like smooth line, triangle, rectangle, sqare, circle etc.
+- *Color Picker:* Changed the app default 12-color choices into a color-picker square. This functionalities was difficult enough that even by connecting the necessary parts together and integrating them into my app, it took me hours and eventually I understood the whole process.  
+- *Drawing Primitives:* Also referred to a website like I did on color-picker, but integrated into my app required my efforts on it, and it was inspiring. 
+- *Undo/Redo:* Got google help and had starting point, but design the implementation method took me some while to get into it. 
+- *Open:* A functionality that I tried and ended up helped in FloodFill for background bitmap;
+- *FloodFill:* Simply referred to websites, tried AsyncTask and Thread two methods, and applied the latter.
+** Screenshots
+- Color-picker
+[[./Screenshot_2014-12-18-14-44-41.png]]
+- Drawing Primitives
+[[./Screenshot_2014-12-18-14-44-54.png]]
+
+* Implementation
+- *Base app* was applied and it I didn't step into it for any code at that time;
+- *Color-picker* and *drawing primitives* are points of my interests. They were not my original work, but it required necessary understanding to integrate the function modules into one functional app. I took my challange and integrated ListView to work with my current app;
+- *Undo/Redo* worth the biggest challange for me. The starting point referred to a website seemed to be easy, but to apply this functionalities to all the drawing primitives, I got helped from the course instructor about interface and different implementation. I digested this interface/implementation concepts completely, and fully understood the primitives design, and designed and implemented the undo/redo functionalities. It worked pretty good, especially for triangle considering its drawing mechanism, except that I didn't think deep into how to make angles smoother than there are right now. 
 
 * Course Benefits
 - The latter half semester of implementing DrawFun Paint project helped me realize that I can perform great in concentrated topics, which helps me focus. 
-- It has been a challanging and interesting learning experience during this Android App Programming, and it successfully reached the target which I expected from this course. I learned the basic necessary knowledge to build my Android App and Java Programming background, and I practised and cultivated the necessary and usefull skills to think logically, solve problems and debug my codes. 
-- The course built knowledge, practised skills, as well as built confidence in programming and problem-solving, and help cultivated my *I CAN DO* attitude towards projects.
-- After taking this course, I have a sufficient starting point to self-learn and practise Android App Programming. And now I am ready to prefer Java over c++ as my primary and first choice programming language, and I will try to conduct more practise on Java programming so I can be proficient on it in not far future. 
+- It has been a challanging and interesting learning experience during this Android App Programming, and it successfully reached the target which I expected from this course. I learned the basic necessary knowledge to build my Android App and Java Programming background, and I practiced and cultivated the necessary and usefull skills to think logically, solve problems and debug my codes. 
+- The course built knowledge, practiced skills, as well as built confidence in programming and problem-solving, and help cultivated my *I CAN DO* attitude towards projects.
+- After taking this course, I have a sufficient starting point to self-learn and practice Android App Programming. And now I am ready to prefer Java over c++ as my primary and first choice programming language, and I will try to conduct more practice on Java programming so I can be proficient on it in not far future. 
+
+* Reference
+- Base App: http://code.tutsplus.com/tutorials/android-sdk-create-a-drawing-app-interface-creation-mobile-19021
+- Drawing Shapes with Finger: http://gmariotti.blogspot.com/2014/01/drawing-shapes-with-fingers.html
+- Load Image: http://www.learn2crack.com/2014/06/android-load-image-from-internet.html
+- Path() library: http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/2.3.1_r1/android/graphics/Path.java
+- Mutable Bitmap: http://stackoverflow.com/questions/13119582/android-immutable-bitmap-crash-error
+- Undo/Redo Start: http://stackoverflow.com/questions/11114625/android-canvas-redo-and-undo-operation
+- FloodFill AsyncTask: http://stackoverflow.com/questions/12669740/android-using-flood-fill-algorithm-getting-out-of-memory-exception
+- FloodFill Thread: http://stackoverflow.com/questions/8070401/android-flood-fill-algorithm
+- I missed one reference. I remembered I refered to some website for color-picker, but I lost track for it. But to be clear, I did refer to the website, and it was NOT my original work. 
